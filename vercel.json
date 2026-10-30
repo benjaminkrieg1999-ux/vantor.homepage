@@ -1,0 +1,9 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/pools", "destination": "/pool", "permanent": true },
+    { "source": "/:path*", "has": [{ "type": "host", "value": "vantor-pools.com" }], "destination": "https://www.vantor-marketing.com/pool", "permanent": false },
+    { "source": "/:path*", "has": [{ "type": "host", "value": "www.vantor-pools.com" }], "destination": "https://www.vantor-marketing.com/pool", "permanent": false }
+  ]
+}
