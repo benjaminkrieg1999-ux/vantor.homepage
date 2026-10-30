@@ -2158,7 +2158,7 @@ body.loading{overflow:hidden}
 const WA_NUMBER     = "4917661039764";
 const WEB3FORMS_KEY = "e79e1bc0-75d6-4793-824f-63a0dc61c5d2";
 const BOOKING_URL   = "https://zeeg.me/krieg/30min";
-const PSI_KEY       = "";   // optional: eigener Google-PageSpeed-API-Key (kostenlos, hebt das Limit). Auf Domain beschränken.
+const PSI_KEY       = "AIzaSyBD-Qe1lN7XD_6LahfAgClAkkjwQ1ctRcc";   // optional: eigener Google-PageSpeed-API-Key (kostenlos, hebt das Limit). Auf Domain beschränken.
 const MAIL_TO       = "info@vantor-marketing.com";
 
 /* Preise (netto). Hier ändern = überall geändert (Konfigurator, Rechner, PDF). */
@@ -2226,15 +2226,39 @@ $$("#ad-b, #c-branche, #f-branche").forEach(sel => {
   const clean = v => { const s = (v || "").trim().replace(/^https?:\/\//i, "").replace(/^www\./i, "").split(/[/?#\s]/)[0].toLowerCase(); return /^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/.test(s) ? s : ""; };
   const col = s => s >= 90 ? "#c8ff0a" : s >= 50 ? "#ffd36b" : "#ff8f7a";
   const CATS = [["performance", "Geschwindigkeit"], ["seo", "SEO-Basis"], ["accessibility", "Barrierefreiheit"], ["best-practices", "Technik"]];
-  async function run(domain) {
+  const PSI_BASE = "https://pagespeedonline.googleapis.com/pagespeedonline/v5/runPagespeed";
+  async function psiFetch(target, useKey) {
     const cats = CATS.map(c => "category=" + c[0]).join("&");
-    const url = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent("https://" + domain)}&strategy=mobile&locale=de&${cats}` + (PSI_KEY ? `&key=${encodeURIComponent(PSI_KEY)}` : "");
-    const ctl = new AbortController(), to = setTimeout(() => ctl.abort(), 90000);
+    const url = `${PSI_BASE}?url=${encodeURIComponent(target)}&strategy=mobile&locale=de&${cats}` + (useKey && PSI_KEY ? `&key=${encodeURIComponent(PSI_KEY)}` : "");
+    const ctl = new AbortController(), to = setTimeout(() => ctl.abort(), 100000);
     try {
       const res = await fetch(url, { signal: ctl.signal });
-      if (res.status === 429) throw new Error("quota");
-      if (!res.ok) throw new Error("http");
-      const j = await res.json(), lr = j.lighthouseResult;
+      let j = null; try { j = await res.json(); } catch (_) {}
+      if (!res.ok) {
+        const msg = (j && j.error && j.error.message) || ("HTTP " + res.status);
+        const err = new Error(res.status === 429 ? "quota" : "http"); err.status = res.status; err.detail = msg;
+        err.keyIssue = res.status === 400 && /key/i.test(msg) || res.status === 403;
+        throw err;
+      }
+      return j;
+    } finally { clearTimeout(to); }
+  }
+  async function run(domain, raw) {
+    const hasWww = /^(https?:\/\/)?www\./i.test(raw || "");
+    const hosts = hasWww ? ["www." + domain, domain] : [domain, "www." + domain];
+    let lastErr = null, useKey = true, j = null;
+    for (const h of hosts) {
+      try { j = await psiFetch("https://" + h, useKey); break; }
+      catch (e) {
+        if (e.keyIssue && useKey) { console.warn("[VANTOR] PSI key problem:", e.detail); useKey = false; try { j = await psiFetch("https://" + h, false); break; } catch (e2) { lastErr = e2; } }
+        else lastErr = e;
+        console.warn("[VANTOR] PSI error for", h, lastErr && (lastErr.detail || lastErr.name));
+        if (lastErr && (lastErr.name === "AbortError" || lastErr.message === "quota")) break;
+      }
+    }
+    try {
+      if (!j) throw lastErr || new Error("empty");
+      const lr = j.lighthouseResult;
       if (!lr || !lr.categories) throw new Error("empty");
       const au = lr.audits || {};
       const scores = CATS.map(([k, l]) => [l, Math.round(((lr.categories[k] || {}).score || 0) * 100)]);
@@ -2247,7 +2271,7 @@ $$("#ad-b, #c-branche, #f-branche").forEach(sel => {
       issues.sort((a, b) => b[0] - a[0]);
       const shot = au["final-screenshot"] && au["final-screenshot"].details && au["final-screenshot"].details.data;
       return { domain, scores, met, issues: issues.slice(0, 4).map(i => i[1]), shot };
-    } catch (e) { e.domain = domain; throw e; } finally { clearTimeout(to); }
+    } catch (e) { e.domain = domain; throw e; }
   }
   const col_html = (r, me) => `<div><h4>${esc(r.domain)}<span>${me ? "Deine Seite" : "Mitbewerber"}</span></h4>
     <div class="bars">${r.scores.map(([l, v]) => `<div class="barrow"><span>${l}</span><div class="track"><i data-w="${v}" style="background:${col(v)}"></i></div><b>${v}</b></div>`).join("")}</div>
@@ -2261,10 +2285,10 @@ $$("#ad-b, #c-branche, #f-branche").forEach(sel => {
     if (!d1) { out.innerHTML = '<p class="status-err" style="margin:0">Bitte gib eine gültige Domain ein, zum Beispiel meinbetrieb.de.</p>'; $("#d1").focus(); return; }
     btn.disabled = true; btn.textContent = "Google misst …";
     out.innerHTML = `<p class="empty"><span class="spin"></span>Google misst <strong>${esc(d1)}</strong>${d2 ? ` und <strong>${esc(d2)}</strong>` : ""} auf einem Handy-Profil. Bis zu einer Minute.</p>`;
-    const res = await Promise.allSettled([run(d1), d2 ? run(d2) : Promise.resolve(null)]);
+    const res = await Promise.allSettled([run(d1, $("#d1").value), d2 ? run(d2, $("#d2").value) : Promise.resolve(null)]);
     const [a, b] = res;
     if (a.status === "rejected" && (!d2 || b.status === "rejected")) {
-      out.innerHTML = `<p class="status-err" style="margin-top:0">Die Messung war gerade nicht möglich.</p><p class="muted">Wir prüfen ${esc(d1)} gern persönlich und schicken dir die Einschätzung.</p><a class="btn btn-signal" target="_blank" rel="noopener" href="${waLink("Hallo VANTOR, bitte prüft meine Website " + d1 + (d2 ? " im Vergleich zu " + d2 : "") + ".")}">Persönlich prüfen lassen</a>`;
+      out.innerHTML = `<p class="status-err" style="margin-top:0">Die Messung war gerade nicht möglich.</p><p class="muted">Wir prüfen ${esc(d1)} gern persönlich und schicken dir die Einschätzung.</p>${a.reason && a.reason.detail ? `<p class="muted" style="font-size:.72rem;opacity:.6">Google meldet: ${esc(String(a.reason.detail).slice(0, 180))}</p>` : ""}<a class="btn btn-signal" target="_blank" rel="noopener" href="${waLink("Hallo VANTOR, bitte prüft meine Website " + d1 + (d2 ? " im Vergleich zu " + d2 : "") + ".")}">Persönlich prüfen lassen</a>`;
     } else {
       const ra = a.status === "fulfilled" ? a.value : null, rb = d2 && b.status === "fulfilled" ? b.value : null;
       let verdict = "";
