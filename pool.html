@@ -424,7 +424,7 @@ footer{border-top:1px solid var(--line);padding:3.5rem 0 calc(2rem + env(safe-ar
 #offer{display:none}
 
 @media (max-width:1060px){
-  .cfg-shell{grid-template-columns:1fr}
+  .cfg-shell{grid-template-columns:minmax(0,1fr)}
   .cfg-right{position:static}
   .extras{grid-template-columns:1fr 1fr}
 }
@@ -875,7 +875,7 @@ kbd{font:600 .72rem var(--sans);background:#122a40;border:1px solid var(--line2)
 .lc .v{font-weight:700;font-variant-numeric:tabular-nums}
 .src{font-size:.62rem;font-weight:700;padding:.08rem .35rem;border-radius:4px;background:#1b3a56;color:var(--soft);white-space:nowrap}
 .src.Google{background:rgba(66,133,244,.2);color:#8ab4f8}.src.Meta{background:rgba(24,119,242,.18);color:#7fb0ff}.src.Website{background:rgba(61,224,255,.14);color:var(--aqua)}.src.Telefon{background:rgba(212,255,58,.14);color:var(--signal)}.src.Google-Profil{background:rgba(245,180,0,.15);color:#f5b400}
-.hot{display:inline-block;width:.45rem;height:.45rem;border-radius:50%;background:#ff6b6b;margin-right:.3rem;vertical-align:1px}
+.lc-hot{display:inline-block;width:.45rem;height:.45rem;border-radius:50%;background:#ff6b6b;margin-right:.3rem;vertical-align:1px}
 .drawer{position:absolute;inset:0;background:rgba(7,19,31,.92);backdrop-filter:blur(4px);border-radius:10px;display:grid;place-items:center;padding:.8rem;z-index:3;animation:scrIn .25s}
 .drawer .dc{width:100%;max-width:26rem;background:var(--panel);border:1px solid var(--line2);border-radius:12px;padding:1rem;font-size:.86rem}
 .drawer .dh{display:flex;justify-content:space-between;align-items:start;gap:1rem}
@@ -2744,7 +2744,7 @@ const SYS = (() => {
     body.innerHTML = up("crm", "Das CRM", 900) + `
       <div class="kpis"><div><span>Neue Anfragen</span><b>${leads.filter(l => l.stage === "neu").length}</b></div><div><span>Offene Pipeline</span><b>${eur(sum())}</b></div><div class="g"><span>Gewonnen</span><b>${eur(sum("won"))}</b></div><div><span>Erste Antwort</span><b>${on("crm") ? "unter 1 Min." : "manuell"}</b></div></div>
       <div class="crm-tools"><div class="crm-f">${["Alle", ...srcs()].map(s => `<button type="button" data-f="${s}" aria-pressed="${s === filter}">${s}</button>`).join("")}</div><button class="btn btn-ghost btn-sm" type="button" id="crm-new">+ Neue Anfrage simulieren</button></div>
-      <div class="board">${STAGES.map(([k, n]) => { const L = vis.filter(l => l.stage === k); return `<div class="col ${k === "won" ? "won" : ""}" data-col="${k}"><h5>${n}<b>${L.length}</b></h5>${L.map(l => `<div class="lc ${l.fresh ? "newin" : ""}" draggable="true" data-id="${l.id}" tabindex="0"><b>${l.hot && k !== "won" ? '<span class="hot" title="heiß"></span>' : ""}${esc(l.name)}</b><span class="pj">${esc(l.proj)}</span><div class="lft"><span class="v">${eur(l.val)}</span><span class="src ${l.src}">${l.src}</span></div></div>`).join("")}</div>`; }).join("")}
+      <div class="board">${STAGES.map(([k, n]) => { const L = vis.filter(l => l.stage === k); return `<div class="col ${k === "won" ? "won" : ""}" data-col="${k}"><h5>${n}<b>${L.length}</b></h5>${L.map(l => `<div class="lc ${l.fresh ? "newin" : ""}" draggable="true" data-id="${l.id}" tabindex="0"><b>${l.hot && k !== "won" ? '<span class="lc-hot" title="heiß"></span>' : ""}${esc(l.name)}</b><span class="pj">${esc(l.proj)}</span><div class="lft"><span class="v">${eur(l.val)}</span><span class="src ${l.src}">${l.src}</span></div></div>`).join("")}</div>`; }).join("")}
       </div>${open ? drawer(leads.find(l => l.id === open), city) : ""}
       <p class="note" style="max-width:none;margin:.7rem 0 0">Karten ziehen, um den Status zu ändern, oder antippen für Details. Beispieldaten, angepasst an deine Branche.</p>`;
     leads.forEach(l => { l.fresh = false; });
