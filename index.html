@@ -1410,6 +1410,15 @@ body.loading{overflow:hidden}
 .vx .lc .lsc{margin-left:auto;font-style:normal;font-size:.62rem;font-weight:700;padding:.05rem .32rem;border-radius:5px;background:rgba(200,255,10,.14);color:var(--aqua)}
 @media (max-width:1180px){.vx .nav a[href="#simulation"]{display:none}}
 @media (max-width:1060px){.vx .nav a[href="#diagnose"]{display:none}}
+.vx .guar{margin:0 0 2rem;border:1px solid var(--signal);border-radius:18px;padding:1.6rem 1.8rem;background:linear-gradient(135deg,rgba(200,255,10,.08),transparent 60%);box-shadow:0 0 0 1px rgba(200,255,10,.15),0 20px 60px rgba(0,0,0,.25)}
+.vx .guar-k{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--signal);font-weight:700;margin-bottom:.5rem}
+.vx .guar h3{font-size:clamp(1.6rem,3vw,2.2rem);margin:0 0 .6rem}
+.vx .guar p{color:var(--soft);max-width:46rem;margin:0 0 1rem}
+.vx .guar ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.vx .guar li{font-size:.92rem;color:var(--muted);border-top:1px solid var(--line);padding-top:.7rem}
+.vx .guar li b{color:var(--text)}
+@media(max-width:760px){.vx .guar ul{grid-template-columns:1fr}}
+.vx .hero-facts a{color:inherit;text-decoration:underline;text-decoration-color:var(--signal);text-underline-offset:3px}
 .vx .two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
 .audit-r .vx .out{background:var(--ink2);min-height:12rem}
 .mx-lead{font-size:.95rem;color:var(--t2);max-width:640px;line-height:1.75;font-weight:300;margin:0 0 2.2rem}
@@ -1521,7 +1530,7 @@ body.loading{overflow:hidden}
 .lsg button{background:none;border:0;font:700 1rem system-ui;cursor:pointer;color:#0a0f14;padding:0 .3rem}
 @media (max-width:900px){.lsw{bottom:5.2rem}.lsg{left:1rem;right:1rem;transform:none;width:auto;border-radius:14px;top:4.6rem}.lsg span{flex:1}}
 @media print{.lsw,.lsg{display:none}}
-</style>
+</style><script src="/track.js" defer></script>
 </head>
 <body class="loading">
 
@@ -1626,14 +1635,14 @@ body.loading{overflow:hidden}
     <span class="mq-i"><span class="sep"></span> Aus Besuchern werden Anrufe</span>
     <span class="mq-i"><span class="sep"></span> Ein Ziel pro Seite</span>
     <span class="mq-i"><span class="sep"></span> Erstkonzept in 48 Stunden</span>
-    <span class="mq-i"><span class="sep"></span> Code, Konten, Daten gehören dir</span>
+    <span class="mq-i"><span class="sep"></span> Jeder Preis offen</span>
     <span class="mq-i"><span class="sep"></span> KI, die nachts Anfragen sortiert</span>
     <span class="mq-i"><span class="sep"></span> Lokal gefunden, lokal gewählt</span>
     <span class="mq-i"><span class="sep"></span> Klartext statt Agentur-Deutsch</span>
     <span class="mq-i"><span class="sep"></span> Aus Besuchern werden Anrufe</span>
     <span class="mq-i"><span class="sep"></span> Ein Ziel pro Seite</span>
     <span class="mq-i"><span class="sep"></span> Erstkonzept in 48 Stunden</span>
-    <span class="mq-i"><span class="sep"></span> Code, Konten, Daten gehören dir</span>
+    <span class="mq-i"><span class="sep"></span> Jeder Preis offen</span>
     <span class="mq-i"><span class="sep"></span> KI, die nachts Anfragen sortiert</span>
     <span class="mq-i"><span class="sep"></span> Lokal gefunden, lokal gewählt</span>
     <span class="mq-i"><span class="sep"></span> Klartext statt Agentur-Deutsch</span>
@@ -2321,7 +2330,7 @@ const MODS = [
   { g: "Extras", k: "content", n: "Content-Tag vor Ort", d: "Fotos und Kurzvideos von deinem Team und deinen Projekten", p: 1200, days: 0 }
 ];
 const CARE = {
-  none:   { n: "Nur Übergabe", d: "Website gehört dir, Pflege machst du selbst", m: 0 },
+  none:   { n: "Nur Übergabe", d: "Website nutzt du unbefristet, Pflege machst du selbst", m: 0 },
   pflege: { n: "Hosting und Pflege", d: "Hosting, Updates, Sicherheit, kleine Änderungen", m: 89 },
   pausch: { n: "Betreuung", d: "SEO, neue Creatives, Kampagnen-Optimierung, Reporting. Inkl. Hosting", m: 895 }
 };
