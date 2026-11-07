@@ -1419,6 +1419,10 @@ body.loading{overflow:hidden}
 .vx .guar li b{color:var(--text)}
 @media(max-width:760px){.vx .guar ul{grid-template-columns:1fr}}
 .vx .hero-facts a{color:inherit;text-decoration:underline;text-decoration-color:var(--signal);text-underline-offset:3px}
+.vx .plans{grid-template-columns:repeat(3,minmax(0,1fr))}
+.vx .plan{min-width:0;overflow-wrap:break-word;hyphens:auto}
+@media(max-width:960px){.vx .plans{grid-template-columns:minmax(0,1fr)}}
+.vx .kbd-btn[hidden]{display:none!important}
 .vx .two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
 .audit-r .vx .out{background:var(--ink2);min-height:12rem}
 .mx-lead{font-size:.95rem;color:var(--t2);max-width:640px;line-height:1.75;font-weight:300;margin:0 0 2.2rem}
@@ -1532,14 +1536,8 @@ body.loading{overflow:hidden}
 @media print{.lsw,.lsg{display:none}}
 </style><script src="/track.js" defer></script>
 </head>
-<body class="loading">
+<body>
 
-<!-- PRELOADER -->
-<div class="pld" id="pld">
-  <div class="pld-lg">VANTOR<i>.</i></div>
-  <div class="pld-bar"><div class="pld-fill"></div></div>
-  <div class="pld-sub">SYSTEM INIT</div>
-</div>
 
 <!-- SCROLL PROGRESS + CURSOR -->
 <div class="sp" id="sp"></div>
@@ -2045,11 +2043,11 @@ body.loading{overflow:hidden}
       </div>
       <div class="fdr-ct" data-r="r">
         <h3>To stiftere.<br/><em>Ingen account manager imellem.</em></h3>
-        <p class="fdr-tx">De fleste bureauer sælger dig klik og forsvinder, når henvendelserne udebliver. Vi tjener først rigtigt, når du bygger. Derfor taler du ikke med en account manager hos os, men med to stiftere, der har kendt hinanden siden børnehaven i Mühlacker. Og som kan præcis de to ting, enhver poolordre afhænger af: at sælge og at bygge.</p>
-        <p class="fdr-tx"><strong>Benjamin sælger.</strong> Over to millioner euro i omsætning via telefonen, med tre personer på 18 måneder, i solcellesalg, hvor hver kunde sammenligner flere tilbud. Før det Head of Sales hos 79degrees AG i Zug. Han ved, hvorfor en bygherre holder op med at svare efter det første tilbud, og hvad der skal siges, for at han skriver under. Netop de ord står på din side, i dine annoncer og i dit WhatsApp-svar. På over ti sprog.</p>
-        <p class="fdr-tx"><strong>Falk bygger.</strong> Belægning og bærelag i anlægsgartneri, forskalling og armering som murer, derefter klimateknik på Hochschule für Technik Stuttgart. Søn af en bygningsingeniør. Han kender byggepladser indefra: skråninger, adgangsveje, udgravning. Derfor stiller din konfigurator de spørgsmål, du ellers først stiller ved besigtigelsen. Og derfor bygger han din tracking som et fundament: først solidt, så hurtigt.</p>
-        <p class="fdr-tx">I finansrådgivningen var Benjamin Falks oplærer. I dag står vi begge med vores navn inde for dit resultat. Du ringer, en af os to tager den. Og ingen hos os skal have forklaret, hvad et bærelag er.</p>
-        <div class="fdr-tr"><div class="ft"><span class="fi">◆</span> Head of Sales, 79degrees AG</div><div class="ft"><span class="fi">◆</span> 2 mio. € i omsætning over telefonen</div><div class="ft"><span class="fi">◆</span> Over 10 sprog</div><div class="ft"><span class="fi">◆</span> Anlægsgartneri og byggeri med egne hænder</div><div class="ft"><span class="fi">◆</span> Klimateknik, HFT Stuttgart</div><div class="ft"><span class="fi">◆</span> Fokus: poolbyggeri</div></div>
+        <p class="fdr-tx">Hos os er der ingen account manager. Du taler med de to, der bygger dit system og står inde for det.</p>
+        <p class="fdr-tx"><strong>Benjamin sælger.</strong> Over to millioner euro i omsætning via telefonen med tre personer på 18 måneder, senest Head of Sales i Schweiz. Han skriver ordene på din side, i dine annoncer og i dit WhatsApp-svar, så en bygherre ikke sammenligner, men ringer.</p>
+        <p class="fdr-tx"><strong>Falk bygger.</strong> Han har selv stået på byggepladsen, i anlægsgartneri og som murer. Derfor stiller din konfigurator de spørgsmål, du ellers først stiller ved besigtigelsen: grund, adgangsvej, budget, tidsramme.</p>
+        <p class="fdr-tx">Vi tjener først rigtigt, når du bygger. Du ringer, en af os to tager den.</p>
+        <div class="fdr-tr"><div class="ft"><span class="fi">◆</span> 2 mio. € i omsætning over telefonen</div><div class="ft"><span class="fi">◆</span> Head of Sales, 79degrees AG</div><div class="ft"><span class="fi">◆</span> Anlægsgartneri og byggeri med egne hænder</div><div class="ft"><span class="fi">◆</span> Fokus: poolbyggeri</div></div>
         <div class="fdr-cta">
           <a href="#book" class="bp" data-h>Tal med os begge <span class="ar">→</span></a>
           <a href="#kontakt" class="bs" data-h>Skriv først</a>
@@ -3245,20 +3243,6 @@ render = function () { _renderL4(); B4.sync(false); SYS.refresh(); };
    VANTOR — SINGLE CLEAN MODULE
 ═══════════════════════════════════════════════════════════════════ */
 
-// --- Preloader
-(function(){
-  const p = document.getElementById('pld');
-  const fire = () => {
-    setTimeout(() => {
-      p.classList.add('done');
-      document.body.classList.remove('loading');
-      setTimeout(() => p.remove(), 700);
-    }, document.readyState === 'complete' ? 1300 : 1900);
-  };
-  if (document.readyState === 'complete') fire();
-  else window.addEventListener('load', fire);
-  setTimeout(() => { if (p.parentNode) { p.classList.add('done'); document.body.classList.remove('loading'); }}, 3500);
-})();
 
 // --- Nav scroll + progress
 const nav = document.getElementById('nav');

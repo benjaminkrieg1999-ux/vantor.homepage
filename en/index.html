@@ -1419,6 +1419,10 @@ body.loading{overflow:hidden}
 .vx .guar li b{color:var(--text)}
 @media(max-width:760px){.vx .guar ul{grid-template-columns:1fr}}
 .vx .hero-facts a{color:inherit;text-decoration:underline;text-decoration-color:var(--signal);text-underline-offset:3px}
+.vx .plans{grid-template-columns:repeat(3,minmax(0,1fr))}
+.vx .plan{min-width:0;overflow-wrap:break-word;hyphens:auto}
+@media(max-width:960px){.vx .plans{grid-template-columns:minmax(0,1fr)}}
+.vx .kbd-btn[hidden]{display:none!important}
 .vx .two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
 .audit-r .vx .out{background:var(--ink2);min-height:12rem}
 .mx-lead{font-size:.95rem;color:var(--t2);max-width:640px;line-height:1.75;font-weight:300;margin:0 0 2.2rem}
@@ -1532,14 +1536,8 @@ body.loading{overflow:hidden}
 @media print{.lsw,.lsg{display:none}}
 </style><script src="/track.js" defer></script>
 </head>
-<body class="loading">
+<body>
 
-<!-- PRELOADER -->
-<div class="pld" id="pld">
-  <div class="pld-lg">VANTOR<i>.</i></div>
-  <div class="pld-bar"><div class="pld-fill"></div></div>
-  <div class="pld-sub">SYSTEM INIT</div>
-</div>
 
 <!-- SCROLL PROGRESS + CURSOR -->
 <div class="sp" id="sp"></div>
@@ -2045,11 +2043,11 @@ body.loading{overflow:hidden}
       </div>
       <div class="fdr-ct" data-r="r">
         <h3>Two founders.<br/><em>No account manager in between.</em></h3>
-        <p class="fdr-tx">Most agencies sell you clicks and disappear when the enquiries dry up. We only really earn when you build. That is why you don’t talk to an account manager here, but to two founders who have known each other since kindergarten in Mühlacker. And who can do exactly the two things every pool contract depends on: selling and building.</p>
-        <p class="fdr-tx"><strong>Benjamin sells.</strong> Over two million euros in revenue by phone, with three people in 18 months, in solar sales, where every customer compares several quotes. Before that, Head of Sales at 79degrees AG in Zug. He knows why a homeowner stops replying after the first quote, and what needs to be said to get the signature. Those exact words go on your page, into your ads and into your WhatsApp reply. In more than ten languages.</p>
-        <p class="fdr-tx"><strong>Falk builds.</strong> Paving and sub-bases in landscaping, formwork and rebar as a bricklayer, then climate engineering at Stuttgart University of Applied Sciences. The son of a civil engineer. He knows building sites from the inside: slopes, access, excavation. That is why your configurator asks the questions you would otherwise only ask on the site visit. And why he builds your tracking like a foundation: clean first, then fast.</p>
-        <p class="fdr-tx">In financial advisory, Benjamin was Falk’s trainer. Today we both put our names behind your result. You call, one of us two picks up. And nobody here needs you to explain what a sub-base is.</p>
-        <div class="fdr-tr"><div class="ft"><span class="fi">◆</span> Head of Sales, 79degrees AG</div><div class="ft"><span class="fi">◆</span> €2M revenue by phone</div><div class="ft"><span class="fi">◆</span> Over 10 languages</div><div class="ft"><span class="fi">◆</span> Hands-on landscaping and building construction</div><div class="ft"><span class="fi">◆</span> Climate engineering, HFT Stuttgart</div><div class="ft"><span class="fi">◆</span> Focus: pool construction</div></div>
+        <p class="fdr-tx">There is no account manager here. You talk to the two people who build your system and stand behind it.</p>
+        <p class="fdr-tx"><strong>Benjamin sells.</strong> Over two million euros in revenue by phone with three people in 18 months, most recently Head of Sales in Switzerland. He writes the words on your page, in your ads and in your WhatsApp reply so a homeowner doesn’t compare, but calls.</p>
+        <p class="fdr-tx"><strong>Falk builds.</strong> He has worked on building sites himself, in landscaping and as a bricklayer. That is why your configurator asks the questions you would otherwise only ask on the site visit: plot, access, budget, timing.</p>
+        <p class="fdr-tx">We only really earn when you build. You call, one of us two picks up.</p>
+        <div class="fdr-tr"><div class="ft"><span class="fi">◆</span> €2M revenue by phone</div><div class="ft"><span class="fi">◆</span> Head of Sales, 79degrees AG</div><div class="ft"><span class="fi">◆</span> Hands-on landscaping and building construction</div><div class="ft"><span class="fi">◆</span> Focus: pool construction</div></div>
         <div class="fdr-cta">
           <a href="#book" class="bp" data-h>Talk to both of us <span class="ar">→</span></a>
           <a href="#kontakt" class="bs" data-h>Write first</a>
@@ -3245,20 +3243,6 @@ render = function () { _renderL4(); B4.sync(false); SYS.refresh(); };
    VANTOR — SINGLE CLEAN MODULE
 ═══════════════════════════════════════════════════════════════════ */
 
-// --- Preloader
-(function(){
-  const p = document.getElementById('pld');
-  const fire = () => {
-    setTimeout(() => {
-      p.classList.add('done');
-      document.body.classList.remove('loading');
-      setTimeout(() => p.remove(), 700);
-    }, document.readyState === 'complete' ? 1300 : 1900);
-  };
-  if (document.readyState === 'complete') fire();
-  else window.addEventListener('load', fire);
-  setTimeout(() => { if (p.parentNode) { p.classList.add('done'); document.body.classList.remove('loading'); }}, 3500);
-})();
 
 // --- Nav scroll + progress
 const nav = document.getElementById('nav');

@@ -1419,6 +1419,10 @@ body.loading{overflow:hidden}
 .vx .guar li b{color:var(--text)}
 @media(max-width:760px){.vx .guar ul{grid-template-columns:1fr}}
 .vx .hero-facts a{color:inherit;text-decoration:underline;text-decoration-color:var(--signal);text-underline-offset:3px}
+.vx .plans{grid-template-columns:repeat(3,minmax(0,1fr))}
+.vx .plan{min-width:0;overflow-wrap:break-word;hyphens:auto}
+@media(max-width:960px){.vx .plans{grid-template-columns:minmax(0,1fr)}}
+.vx .kbd-btn[hidden]{display:none!important}
 .vx .two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
 .audit-r .vx .out{background:var(--ink2);min-height:12rem}
 .mx-lead{font-size:.95rem;color:var(--t2);max-width:640px;line-height:1.75;font-weight:300;margin:0 0 2.2rem}
@@ -1532,14 +1536,8 @@ body.loading{overflow:hidden}
 @media print{.lsw,.lsg{display:none}}
 </style><script src="/track.js" defer></script>
 </head>
-<body class="loading">
+<body>
 
-<!-- PRELOADER -->
-<div class="pld" id="pld">
-  <div class="pld-lg">VANTOR<i>.</i></div>
-  <div class="pld-bar"><div class="pld-fill"></div></div>
-  <div class="pld-sub">SYSTEM INIT</div>
-</div>
 
 <!-- SCROLL PROGRESS + CURSOR -->
 <div class="sp" id="sp"></div>
@@ -2045,11 +2043,11 @@ body.loading{overflow:hidden}
       </div>
       <div class="fdr-ct" data-r="r">
         <h3>Dois fundadores.<br/><em>Nenhum gestor de conta pelo meio.</em></h3>
-        <p class="fdr-tx">A maioria das agências vende-lhe cliques e desaparece quando os pedidos deixam de chegar. Nós só ganhamos a sério quando constrói. Por isso, aqui não fala com um gestor de conta, mas com dois fundadores que se conhecem desde o jardim de infância em Mühlacker. E que sabem fazer exatamente as duas coisas de que depende cada piscina vendida: vender e construir.</p>
-        <p class="fdr-tx"><strong>O Benjamin vende.</strong> Mais de dois milhões de euros de faturação ao telefone, com três pessoas em 18 meses, na venda de energia solar, onde cada cliente compara vários orçamentos. Antes disso, Head of Sales na 79degrees AG em Zug. Sabe porque é que um cliente deixa de responder depois do primeiro orçamento e o que é preciso dizer para que assine. São exatamente essas palavras que estão na sua página, nos seus anúncios e na sua resposta por WhatsApp. Em mais de dez línguas.</p>
-        <p class="fdr-tx"><strong>O Falk constrói.</strong> Pavimentos e camadas de base em paisagismo, cofragens e armaduras como pedreiro, depois engenharia climática na Universidade de Ciências Aplicadas de Estugarda. Filho de um engenheiro civil. Conhece as obras por dentro: declives, acessos, escavação. Por isso o seu configurador faz as perguntas que normalmente só faria na visita à obra. E por isso constrói a sua medição como uma fundação: primeiro bem feita, depois rápida.</p>
-        <p class="fdr-tx">Na consultoria financeira, o Benjamin foi formador do Falk. Hoje damos ambos a cara pelo seu resultado. Liga, atende um de nós dois. E ninguém aqui precisa que lhe expliquem o que é uma camada de base.</p>
-        <div class="fdr-tr"><div class="ft"><span class="fi">◆</span> Head of Sales, 79degrees AG</div><div class="ft"><span class="fi">◆</span> 2 M€ de faturação ao telefone</div><div class="ft"><span class="fi">◆</span> Mais de 10 línguas</div><div class="ft"><span class="fi">◆</span> Paisagismo e construção civil em primeira mão</div><div class="ft"><span class="fi">◆</span> Engenharia Climática, HFT Stuttgart</div><div class="ft"><span class="fi">◆</span> Foco: construção de piscinas</div></div>
+        <p class="fdr-tx">Aqui não há gestor de conta. Fala com as duas pessoas que constroem o seu sistema e dão a cara por ele.</p>
+        <p class="fdr-tx"><strong>O Benjamin vende.</strong> Mais de dois milhões de euros de faturação ao telefone com três pessoas em 18 meses, por último Head of Sales na Suíça. Escreve as palavras da sua página, dos seus anúncios e da sua resposta por WhatsApp para que o cliente não compare, mas ligue.</p>
+        <p class="fdr-tx"><strong>O Falk constrói.</strong> Trabalhou ele próprio em obra, em paisagismo e como pedreiro. Por isso o seu configurador faz as perguntas que normalmente só faria na visita à obra: terreno, acesso, orçamento, prazo.</p>
+        <p class="fdr-tx">Só ganhamos a sério quando constrói. Liga, atende um de nós dois.</p>
+        <div class="fdr-tr"><div class="ft"><span class="fi">◆</span> 2 M€ de faturação ao telefone</div><div class="ft"><span class="fi">◆</span> Head of Sales, 79degrees AG</div><div class="ft"><span class="fi">◆</span> Paisagismo e construção civil em primeira mão</div><div class="ft"><span class="fi">◆</span> Foco: construção de piscinas</div></div>
         <div class="fdr-cta">
           <a href="#book" class="bp" data-h>Falar com os dois <span class="ar">→</span></a>
           <a href="#kontakt" class="bs" data-h>Primeiro, escrever</a>
@@ -3245,20 +3243,6 @@ render = function () { _renderL4(); B4.sync(false); SYS.refresh(); };
    VANTOR — SINGLE CLEAN MODULE
 ═══════════════════════════════════════════════════════════════════ */
 
-// --- Preloader
-(function(){
-  const p = document.getElementById('pld');
-  const fire = () => {
-    setTimeout(() => {
-      p.classList.add('done');
-      document.body.classList.remove('loading');
-      setTimeout(() => p.remove(), 700);
-    }, document.readyState === 'complete' ? 1300 : 1900);
-  };
-  if (document.readyState === 'complete') fire();
-  else window.addEventListener('load', fire);
-  setTimeout(() => { if (p.parentNode) { p.classList.add('done'); document.body.classList.remove('loading'); }}, 3500);
-})();
 
 // --- Nav scroll + progress
 const nav = document.getElementById('nav');

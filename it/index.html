@@ -1419,6 +1419,10 @@ body.loading{overflow:hidden}
 .vx .guar li b{color:var(--text)}
 @media(max-width:760px){.vx .guar ul{grid-template-columns:1fr}}
 .vx .hero-facts a{color:inherit;text-decoration:underline;text-decoration-color:var(--signal);text-underline-offset:3px}
+.vx .plans{grid-template-columns:repeat(3,minmax(0,1fr))}
+.vx .plan{min-width:0;overflow-wrap:break-word;hyphens:auto}
+@media(max-width:960px){.vx .plans{grid-template-columns:minmax(0,1fr)}}
+.vx .kbd-btn[hidden]{display:none!important}
 .vx .two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
 .audit-r .vx .out{background:var(--ink2);min-height:12rem}
 .mx-lead{font-size:.95rem;color:var(--t2);max-width:640px;line-height:1.75;font-weight:300;margin:0 0 2.2rem}
@@ -1532,14 +1536,8 @@ body.loading{overflow:hidden}
 @media print{.lsw,.lsg{display:none}}
 </style><script src="/track.js" defer></script>
 </head>
-<body class="loading">
+<body>
 
-<!-- PRELOADER -->
-<div class="pld" id="pld">
-  <div class="pld-lg">VANTOR<i>.</i></div>
-  <div class="pld-bar"><div class="pld-fill"></div></div>
-  <div class="pld-sub">SYSTEM INIT</div>
-</div>
 
 <!-- SCROLL PROGRESS + CURSOR -->
 <div class="sp" id="sp"></div>
@@ -2045,11 +2043,11 @@ body.loading{overflow:hidden}
       </div>
       <div class="fdr-ct" data-r="r">
         <h3>Due fondatori.<br/><em>Nessun account manager in mezzo.</em></h3>
-        <p class="fdr-tx">La maggior parte delle agenzie ti vende clic e sparisce quando le richieste non arrivano. Noi guadagniamo davvero solo quando costruisci. Per questo da noi non parli con un account manager, ma con due fondatori che si conoscono dall’asilo a Mühlacker. E che sanno fare esattamente le due cose da cui dipende ogni piscina venduta: vendere e costruire.</p>
-        <p class="fdr-tx"><strong>Benjamin vende.</strong> Oltre due milioni di euro di fatturato al telefono, con tre persone in 18 mesi, nella vendita di fotovoltaico, dove ogni cliente confronta più preventivi. Prima Head of Sales presso 79degrees AG a Zugo. Sa perché un cliente smette di rispondere dopo il primo preventivo e cosa bisogna dire perché firmi. Sono proprio queste le parole sulla tua pagina, nei tuoi annunci e nella tua risposta WhatsApp. In più di dieci lingue.</p>
-        <p class="fdr-tx"><strong>Falk costruisce.</strong> Pavimentazioni e sottofondi nei giardini e paesaggi, casseri e armature come muratore, poi ingegneria climatica all’Università di Scienze Applicate di Stoccarda. Figlio di un ingegnere edile. Conosce i cantieri dall’interno: pendenze, accessi, scavi. Per questo il tuo configuratore fa le domande che altrimenti faresti solo al sopralluogo. E per questo costruisce il tuo tracciamento come una fondazione: prima pulito, poi veloce.</p>
-        <p class="fdr-tx">Nella consulenza finanziaria Benjamin è stato il formatore di Falk. Oggi ci mettiamo entrambi la faccia per il tuo risultato. Chiami, risponde uno di noi due. E a nessuno di noi devi spiegare cos’è un sottofondo.</p>
-        <div class="fdr-tr"><div class="ft"><span class="fi">◆</span> Head of Sales, 79degrees AG</div><div class="ft"><span class="fi">◆</span> 2 mln € di fatturato al telefono</div><div class="ft"><span class="fi">◆</span> Oltre 10 lingue</div><div class="ft"><span class="fi">◆</span> Giardini ed edilizia, fatti con le proprie mani</div><div class="ft"><span class="fi">◆</span> Ingegneria climatica, HFT Stoccarda</div><div class="ft"><span class="fi">◆</span> Focus: piscine</div></div>
+        <p class="fdr-tx">Da noi non c’è nessun account manager. Parli con le due persone che costruiscono il tuo sistema e ci mettono la faccia.</p>
+        <p class="fdr-tx"><strong>Benjamin vende.</strong> Oltre due milioni di euro di fatturato al telefono con tre persone in 18 mesi, da ultimo Head of Sales in Svizzera. Scrive le parole sulla tua pagina, nei tuoi annunci e nella tua risposta WhatsApp in modo che il cliente non confronti, ma chiami.</p>
+        <p class="fdr-tx"><strong>Falk costruisce.</strong> Ha lavorato lui stesso in cantiere, nei giardini e come muratore. Per questo il tuo configuratore fa le domande che altrimenti faresti solo al sopralluogo: terreno, accesso, budget, tempistiche.</p>
+        <p class="fdr-tx">Guadagniamo davvero solo quando costruisci. Chiami, risponde uno di noi due.</p>
+        <div class="fdr-tr"><div class="ft"><span class="fi">◆</span> 2 mln € di fatturato al telefono</div><div class="ft"><span class="fi">◆</span> Head of Sales, 79degrees AG</div><div class="ft"><span class="fi">◆</span> Giardini ed edilizia, fatti con le proprie mani</div><div class="ft"><span class="fi">◆</span> Focus: piscine</div></div>
         <div class="fdr-cta">
           <a href="#book" class="bp" data-h>Parla con entrambi noi <span class="ar">→</span></a>
           <a href="#kontakt" class="bs" data-h>Prima scrivo</a>
@@ -3245,20 +3243,6 @@ render = function () { _renderL4(); B4.sync(false); SYS.refresh(); };
    VANTOR — SINGLE CLEAN MODULE
 ═══════════════════════════════════════════════════════════════════ */
 
-// --- Preloader
-(function(){
-  const p = document.getElementById('pld');
-  const fire = () => {
-    setTimeout(() => {
-      p.classList.add('done');
-      document.body.classList.remove('loading');
-      setTimeout(() => p.remove(), 700);
-    }, document.readyState === 'complete' ? 1300 : 1900);
-  };
-  if (document.readyState === 'complete') fire();
-  else window.addEventListener('load', fire);
-  setTimeout(() => { if (p.parentNode) { p.classList.add('done'); document.body.classList.remove('loading'); }}, 3500);
-})();
 
 // --- Nav scroll + progress
 const nav = document.getElementById('nav');

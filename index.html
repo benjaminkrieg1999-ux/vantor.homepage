@@ -1419,6 +1419,10 @@ body.loading{overflow:hidden}
 .vx .guar li b{color:var(--text)}
 @media(max-width:760px){.vx .guar ul{grid-template-columns:1fr}}
 .vx .hero-facts a{color:inherit;text-decoration:underline;text-decoration-color:var(--signal);text-underline-offset:3px}
+.vx .plans{grid-template-columns:repeat(3,minmax(0,1fr))}
+.vx .plan{min-width:0;overflow-wrap:break-word;hyphens:auto}
+@media(max-width:960px){.vx .plans{grid-template-columns:minmax(0,1fr)}}
+.vx .kbd-btn[hidden]{display:none!important}
 .vx .two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
 .audit-r .vx .out{background:var(--ink2);min-height:12rem}
 .mx-lead{font-size:.95rem;color:var(--t2);max-width:640px;line-height:1.75;font-weight:300;margin:0 0 2.2rem}
@@ -1532,14 +1536,8 @@ body.loading{overflow:hidden}
 @media print{.lsw,.lsg{display:none}}
 </style><script src="/track.js" defer></script>
 </head>
-<body class="loading">
+<body>
 
-<!-- PRELOADER -->
-<div class="pld" id="pld">
-  <div class="pld-lg">VANTOR<i>.</i></div>
-  <div class="pld-bar"><div class="pld-fill"></div></div>
-  <div class="pld-sub">SYSTEM INIT</div>
-</div>
 
 <!-- SCROLL PROGRESS + CURSOR -->
 <div class="sp" id="sp"></div>
@@ -2045,11 +2043,11 @@ body.loading{overflow:hidden}
       </div>
       <div class="fdr-ct" data-r="r">
         <h3>Zwei Gründer.<br/><em>Kein Account-Manager dazwischen.</em></h3>
-        <p class="fdr-tx">Die meisten Agenturen verkaufen dir Klicks und sind weg, wenn die Anfragen ausbleiben. Wir verdienen erst richtig, wenn du baust. Deshalb sprichst du bei uns nicht mit einem Account-Manager, sondern mit zwei Gründern, die sich seit dem Kindergarten in Mühlacker kennen. Und die genau die zwei Dinge können, an denen jeder Poolauftrag hängt: verkaufen und bauen.</p>
-        <p class="fdr-tx"><strong>Benjamin verkauft.</strong> Über zwei Millionen Euro Umsatz am Telefon, mit drei Leuten in 18 Monaten, im Photovoltaik-Vertrieb, wo jeder Kunde mehrere Angebote vergleicht. Davor Head of Sales bei der 79degrees AG in Zug. Er weiß, warum ein Bauherr nach dem ersten Angebot nicht mehr antwortet, und was man sagen muss, damit er unterschreibt. Genau diese Worte stehen auf deiner Seite, in deinen Anzeigen und in deiner WhatsApp-Antwort. In über zehn Sprachen.</p>
-        <p class="fdr-tx"><strong>Falk baut.</strong> Pflaster und Tragschichten im Garten- und Landschaftsbau, Schalung und Bewehrung als Maurer, danach Klima-Engineering an der Hochschule für Technik Stuttgart. Sohn eines Bauingenieurs. Er kennt Baustellen von innen: Hanglage, Zufahrt, Aushub. Deshalb stellt dein Konfigurator die Fragen, die du sonst erst beim Ortstermin stellst. Und deshalb baut er dein Tracking wie ein Fundament: erst sauber, dann schnell.</p>
-        <p class="fdr-tx">In der Finanzberatung war Benjamin Falks Ausbilder. Heute stehen wir beide mit unserem Namen für dein Ergebnis. Du rufst an, einer von uns beiden geht ran. Und niemandem bei uns musst du erklären, was eine Tragschicht ist.</p>
-        <div class="fdr-tr"><div class="ft"><span class="fi">◆</span> Head of Sales, 79degrees AG</div><div class="ft"><span class="fi">◆</span> 2 Mio. € Umsatz am Telefon</div><div class="ft"><span class="fi">◆</span> Über 10 Sprachen</div><div class="ft"><span class="fi">◆</span> Galabau und Hochbau aus eigener Hand</div><div class="ft"><span class="fi">◆</span> Klima-Engineering, HFT Stuttgart</div><div class="ft"><span class="fi">◆</span> Fokus: Poolbau</div></div>
+        <p class="fdr-tx">Bei uns gibt es keinen Account-Manager. Du sprichst mit den zwei Leuten, die dein System bauen und dafür geradestehen.</p>
+        <p class="fdr-tx"><strong>Benjamin verkauft.</strong> Mit drei Leuten in 18 Monaten über zwei Millionen Euro Umsatz am Telefon, zuletzt Head of Sales in der Schweiz. Er schreibt die Worte auf deiner Seite, in deinen Anzeigen und in deiner WhatsApp-Antwort so, dass ein Bauherr nicht vergleicht, sondern anruft.</p>
+        <p class="fdr-tx"><strong>Falk baut.</strong> Er stand selbst im Garten- und Landschaftsbau und als Maurer auf der Baustelle. Deshalb stellt dein Konfigurator die Fragen, die du sonst erst beim Ortstermin stellst: Grundstück, Zufahrt, Budget, Zeitraum.</p>
+        <p class="fdr-tx">Wir verdienen erst richtig, wenn du baust. Du rufst an, einer von uns beiden geht ran.</p>
+        <div class="fdr-tr"><div class="ft"><span class="fi">◆</span> 2 Mio. € Umsatz am Telefon</div><div class="ft"><span class="fi">◆</span> Head of Sales, 79degrees AG</div><div class="ft"><span class="fi">◆</span> Galabau und Hochbau aus eigener Hand</div><div class="ft"><span class="fi">◆</span> Fokus: Poolbau</div></div>
         <div class="fdr-cta">
           <a href="#book" class="bp" data-h>Mit uns beiden sprechen <span class="ar">→</span></a>
           <a href="#kontakt" class="bs" data-h>Erst mal schreiben</a>
@@ -3245,20 +3243,6 @@ render = function () { _renderL4(); B4.sync(false); SYS.refresh(); };
    VANTOR — SINGLE CLEAN MODULE
 ═══════════════════════════════════════════════════════════════════ */
 
-// --- Preloader
-(function(){
-  const p = document.getElementById('pld');
-  const fire = () => {
-    setTimeout(() => {
-      p.classList.add('done');
-      document.body.classList.remove('loading');
-      setTimeout(() => p.remove(), 700);
-    }, document.readyState === 'complete' ? 1300 : 1900);
-  };
-  if (document.readyState === 'complete') fire();
-  else window.addEventListener('load', fire);
-  setTimeout(() => { if (p.parentNode) { p.classList.add('done'); document.body.classList.remove('loading'); }}, 3500);
-})();
 
 // --- Nav scroll + progress
 const nav = document.getElementById('nav');
