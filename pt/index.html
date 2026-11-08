@@ -1520,6 +1520,60 @@ body.loading{overflow:hidden}
 .case-note{font-size:.8rem;color:var(--t2);margin-top:1rem;max-width:34rem}
 </style>
 <style>
+.ba-r{container-type:inline-size}
+.ba-img.before{z-index:1}.ba-img.after{z-index:2}.ba-img .lbl{z-index:6}
+.ba-img.before::after,.ba-img.after::after{display:none}
+.mk{position:absolute;inset:0;padding:4.5cqw 5cqw;font-family:var(--sans);overflow:hidden}
+.mk i,.mk em,.mk b{font-style:normal}
+.mk-top{display:flex;align-items:center;justify-content:space-between;gap:2cqw}
+.mk-logo{font-weight:800;letter-spacing:.12em;font-size:2.1cqw}
+.mk-n{position:absolute;z-index:4;font:600 1.55cqw/1.2 var(--sans);padding:.55cqw 1.1cqw;border-radius:99px;white-space:nowrap;box-shadow:0 .6cqw 1.6cqw rgba(0,0,0,.25);animation:mkPop .5s both}
+/* VORHER */
+.mk.bad{background:#f1f0ea;color:#555;font-family:Georgia,"Times New Roman",serif}
+.bad .mk-logo{color:#2a4a7a;font-family:Arial,sans-serif}
+.bad .mk-nav{display:flex;gap:1.3cqw;font-size:1.45cqw;color:#2a4a7a;text-decoration:underline}
+.bad .mk-slider{margin:3cqw 0 2.4cqw;height:17cqw;border-radius:.6cqw;background:linear-gradient(110deg,#9aa6b2,#c6ccd2 40%,#9aa6b2);background-size:220% 100%;animation:mkSlide 4s linear infinite;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2cqw}
+.bad .mk-slider span{font-size:2.9cqw;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.4);font-style:italic}
+.bad .mk-slider em{display:flex;gap:1cqw}.bad .mk-slider em i{width:1.2cqw;height:1.2cqw;border-radius:50%;background:rgba(255,255,255,.55)}
+.bad .mk-slider em i:nth-child(1){animation:mkDot 3s infinite}.bad .mk-slider em i:nth-child(2){animation:mkDot 3s 1s infinite}.bad .mk-slider em i:nth-child(3){animation:mkDot 3s 2s infinite}
+.bad .mk-txt{font-size:1.65cqw;line-height:1.5;margin:0 0 2cqw;color:#666;text-align:justify}
+.bad .mk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1cqw}
+.bad .mk-grid i{background:#dcdbd3;border:1px solid #c9c8bf;font-size:1.5cqw;text-align:center;padding:2.4cqw 0;color:#777}
+.bad .mk-foot{margin-top:2cqw;font-size:1.1cqw;color:#999;text-align:right}
+.bad .mk-cookie{position:absolute;left:0;right:0;bottom:0;padding:2.6cqw 5cqw 7cqw;background:#3b3b3b;color:#ddd;font:1.5cqw/1.5 Arial,sans-serif;animation:mkCookie 9s 1s infinite}
+.bad .mk-cookie b{display:inline-block;margin-left:1.2cqw;padding:.5cqw 1.4cqw;background:#777;color:#fff;font-weight:400}
+.bad .mk-n{background:#e5484d;color:#fff;font-family:var(--sans)}
+.n1{top:1.6cqw;left:40%}.n2{top:12cqw;left:7%}.n3{top:30.5cqw;left:5%;animation-delay:.2s}.n4{top:44cqw;left:8%;animation-delay:.4s}.n5{top:52.5cqw;left:44%;animation-delay:.6s}.n6{top:60cqw;left:6%;animation-delay:.8s}
+/* NACHHER */
+.mk.good{background:radial-gradient(70% 60% at 85% 0%,rgba(200,255,10,.10),transparent 60%),#0b0b12;color:var(--t1)}
+.good .mk-logo{color:var(--t1)}
+.good .mk-btn{display:inline-flex;align-items:center;justify-content:center;background:var(--primary);color:#030304;font-weight:700;border-radius:1cqw}
+.good .mk-btn.sm{font-size:1.4cqw;padding:.9cqw 1.6cqw}
+.good .mk-body{margin-left:44%}
+.good .mk-h{margin:5cqw 0 1.6cqw;font-family:var(--serif);font-size:4.3cqw;line-height:1.05}
+.good .mk-h em{display:block;color:var(--primary);font-style:italic}
+.good .mk-trust{font-size:1.5cqw;color:#ffd36b;margin-bottom:2.6cqw}
+.good .mk-cfg{padding:2cqw;border:1px solid var(--b2);border-radius:1.4cqw;background:rgba(255,255,255,.03)}
+.good .mk-cfg>span{display:block;font-size:1.4cqw;color:var(--t2);margin-bottom:1.2cqw}
+.good .mk-chips{display:flex;gap:1cqw;margin-bottom:1.6cqw}
+.good .mk-chips i{font-size:1.35cqw;padding:.7cqw 1.3cqw;border-radius:99px;border:1px solid var(--b2);color:var(--t2);animation:mkChip 6s infinite}
+.good .mk-chips i:nth-child(2){animation-delay:2s}.good .mk-chips i:nth-child(3){animation-delay:4s}
+.good .mk-cfg b{display:block;font-size:2cqw;color:var(--t1)}
+.good .mk-btn.big{margin-top:2.6cqw;font-size:1.9cqw;padding:1.6cqw 3cqw;animation:mkPulse 2.2s infinite}
+.good .mk-wa{position:absolute;left:5cqw;bottom:12cqw;max-width:34%;display:flex;gap:1cqw;align-items:flex-start;background:#1f3a2c;color:#d9f7e6;font-size:1.4cqw;line-height:1.35;padding:1.4cqw 1.6cqw;border-radius:1.6cqw 1.6cqw .3cqw 1.6cqw;animation:mkWa 6s infinite}
+.good .mk-wa i{color:#3ddc97;font-weight:700}
+.good .mk-n{background:#16301f;color:#7dffb0;border:1px solid rgba(61,220,151,.45)}
+.g1{top:13cqw;left:5%}.g2{top:22cqw;left:9%;animation-delay:.2s}.g3{top:32cqw;left:5%;animation-delay:.4s}.g4{top:44cqw;left:12%;animation-delay:.6s}.g5{top:53cqw;left:6%;animation-delay:.8s}
+.ba-cap{font-size:.78rem;color:var(--t3);margin:.8rem 0 0;text-align:right}
+@keyframes mkPop{from{opacity:0;transform:scale(.85)}}
+@keyframes mkSlide{to{background-position:-220% 0}}
+@keyframes mkDot{0%,30%{background:#fff}34%,100%{background:rgba(255,255,255,.55)}}
+@keyframes mkCookie{0%{transform:translateY(100%)}8%,100%{transform:none}}
+@keyframes mkChip{0%,30%{background:var(--primary);color:#030304;border-color:var(--primary)}34%,100%{background:none;color:var(--t2);border-color:var(--b2)}}
+@keyframes mkPulse{0%,100%{box-shadow:0 0 0 0 rgba(200,255,10,.45)}60%{box-shadow:0 0 0 1.6cqw rgba(200,255,10,0)}}
+@keyframes mkWa{0%,15%{opacity:0;transform:translateY(1.5cqw) scale(.95)}22%,92%{opacity:1;transform:none}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.mk *{animation:none!important}}
+</style><style>
 #consulting .vp{display:grid;grid-template-columns:1.05fr 1fr;gap:2.4rem;margin-top:2.6rem;padding:clamp(1.4rem,3vw,2.4rem);border:1px solid var(--primary);border-radius:22px;background:linear-gradient(135deg,rgba(200,255,10,.06),transparent 75%);box-shadow:0 0 60px rgba(0,0,0,.35);text-align:left}
 #consulting .vp h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,3.4vw,2.6rem);line-height:1.08;margin:.4rem 0 .9rem;color:var(--t1)}
 #consulting .vp p{color:var(--t2);font-size:1rem;line-height:1.6;margin:0 0 1rem}
@@ -1780,11 +1834,37 @@ body.loading{overflow:hidden}
         </div>
       </div>
       <div class="ba-r" id="baR" data-r="r">
-        <div class="ba-img before"><span class="lbl">ANTES</span></div>
-        <div class="ba-img after" id="baAfter"><span class="lbl">VANTOR</span></div>
+        <div class="ba-img before"><div class="mk bad" aria-hidden="true">
+  <div class="mk-top"><b class="mk-logo">EXEMPLO</b><span class="mk-nav"><i>Início</i><i>Sobre nós</i><i>Serviços</i><i>Referências</i><i>Novidades</i><i>Parceiros</i><i>Emprego</i><i>Contacto</i></span></div>
+  <div class="mk-slider"><span>Bem-vindos à nossa página!</span><em><i></i><i></i><i></i></em></div>
+  <p class="mk-txt">Desde 1987 somos o seu parceiro competente em aquecimento, canalização e muito mais. Qualidade, fiabilidade e satisfação do cliente estão em primeiro lugar.</p>
+  <div class="mk-grid"><i>Aquecimento</i><i>Canalização</i><i>Ventilação</i><i>Solar</i><i>Manutenção</i><i>Assistência</i></div>
+  <div class="mk-foot">Contacto: ver ficha técnica</div>
+  <div class="mk-cookie">Este site utiliza cookies para lhe proporcionar a melhor experiência possível. <b>Definições</b><b>OK</b></div>
+  <span class="mk-n n1">1 · 8 itens de menu, nenhum objetivo</span>
+  <span class="mk-n n2">2 · Saudação em vez de benefício</span>
+  <span class="mk-n n3">3 · Texto sobre a empresa</span>
+  <span class="mk-n n4">4 · Sem preço, sem prova</span>
+  <span class="mk-n n5">5 · Contacto em letra pequena</span>
+  <span class="mk-n n6">6 · Banner de cookies tapa tudo</span>
+</div><span class="lbl">ANTES</span></div>
+        <div class="ba-img after" id="baAfter"><div class="mk good" aria-hidden="true">
+  <div class="mk-top"><b class="mk-logo">EXEMPLO</b><span class="mk-btn sm">Ligamos em 15 min.</span></div>
+  <div class="mk-body"><div class="mk-h">Novo aquecimento no Porto. <em>Preço fixo em 48 horas.</em></div>
+  <div class="mk-trust">★★★★★ Avaliações Google à vista</div>
+  <div class="mk-cfg"><span>De que precisa?</span><span class="mk-chips"><i>Bomba de calor</i><i>Caldeira a gás</i><i>Reparação</i></span><b>Intervalo de preço: 18.000–24.000 €</b></div>
+  <span class="mk-btn big">Pedir preço fixo →</span></div>
+  <div class="mk-wa"><i>✓</i>Obrigado! Ligamos-lhe hoje até às 16h.</div>
+  <span class="mk-n g1">✓ Benefício em 3 segundos</span>
+  <span class="mk-n g2">✓ Prova logo visível</span>
+  <span class="mk-n g3">✓ Intervalo de preço em vez de “sob consulta”</span>
+  <span class="mk-n g4">✓ Um objetivo, um botão</span>
+  <span class="mk-n g5">✓ Resposta em segundos</span>
+</div><span class="lbl">VANTOR</span></div>
         <div class="ba-handle" id="baHandle"></div>
         <div class="ba-knob" id="baKnob"></div>
       </div>
+      <p class="ba-cap">Ilustração de exemplo, não é um projeto de cliente. Arraste o cursor.</p>
     </div>
   </div>
 </section>
