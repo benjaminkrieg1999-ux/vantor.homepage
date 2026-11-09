@@ -1037,6 +1037,70 @@ kbd{font:600 .72rem var(--sans);background:#122a40;border:1px solid var(--line2)
 .kbd-btn[hidden]{display:none!important}
 @media (max-width:960px){.founder{grid-template-columns:minmax(0,1fr)}.founder .duo{max-width:34rem}}
 @media (max-width:600px){.steps2 div{flex-direction:column;gap:.25rem}.steps2 div span:last-child{color:var(--text);font-weight:600}}
+
+/* Vorher/Nachher Pool-Mockups */
+.cmp{container-type:inline-size}
+.cmp .tag{top:auto;bottom:.9rem;z-index:6}
+.pk{font-family:var(--sans)}
+.pk i,.pk em,.pk b{font-style:normal}
+.pk-n{position:absolute;z-index:5;font:600 calc(1.35cqw*var(--f,1))/1.2 var(--sans);padding:calc(.5cqw*var(--f,1)) calc(1cqw*var(--f,1));border-radius:99px;white-space:nowrap;box-shadow:0 calc(.5cqw*var(--f,1)) calc(1.4cqw*var(--f,1)) rgba(0,0,0,.25);animation:pkPop .5s both}
+.old.pk{background:#eef1f4;color:#556;font-family:Verdana,Arial,sans-serif}
+.pk-bar{display:flex;justify-content:space-between;align-items:center;background:#fff;border-bottom:3px solid #1e5aa8;padding:calc(2cqw*var(--f,1)) calc(4cqw*var(--f,1))}
+.pk-bar b{color:#1e5aa8;font-size:calc(2cqw*var(--f,1));font-family:"Comic Sans MS","Trebuchet MS",sans-serif}
+.pk-bar i{display:flex;gap:calc(1.2cqw*var(--f,1));font-size:calc(1.15cqw*var(--f,1));color:#1e5aa8}
+.pk-hero{margin:calc(2cqw*var(--f,1)) calc(4cqw*var(--f,1));height:calc(17cqw*var(--f,1));border-radius:calc(.4cqw*var(--f,1));background:linear-gradient(115deg,#7fb2d6,#bcd7ea 45%,#7fb2d6);background-size:240% 100%;animation:pkSlide 5s linear infinite;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:calc(1.6cqw*var(--f,1))}
+.pk-hero span{font-size:calc(2.6cqw*var(--f,1));color:#fff;font-style:italic;text-shadow:0 1px 3px rgba(0,0,0,.35);font-family:Georgia,serif}
+.pk-hero em{display:flex;gap:calc(1cqw*var(--f,1))}.pk-hero em i{width:calc(1cqw*var(--f,1));height:calc(1cqw*var(--f,1));border-radius:50%;background:rgba(255,255,255,.5)}
+.pk-hero em i:nth-child(1){animation:pkDot 3s infinite}.pk-hero em i:nth-child(2){animation:pkDot 3s 1s infinite}.pk-hero em i:nth-child(3){animation:pkDot 3s 2s infinite}
+.pk-row{display:grid;grid-template-columns:1.2fr 1fr;gap:calc(3cqw*var(--f,1));margin:0 calc(4cqw*var(--f,1))}
+.pk-col p{font-size:calc(1.4cqw*var(--f,1));line-height:1.5;margin:0 0 calc(1.4cqw*var(--f,1));color:#667}
+.pk-pdf{display:inline-block;font-size:calc(1.2cqw*var(--f,1));color:#1e5aa8;text-decoration:underline}
+.pk-form{background:#fff;border:1px solid #cfd6de;padding:calc(1.4cqw*var(--f,1));display:grid;grid-template-columns:1fr 1fr;gap:calc(.7cqw*var(--f,1))}
+.pk-form b{grid-column:1/-1;font-size:calc(1.3cqw*var(--f,1));color:#445}
+.pk-form i{height:calc(2cqw*var(--f,1));border:1px solid #cfd6de;background:#f7f8fa}
+.pk-form span{grid-column:1/-1;justify-self:start;font-size:calc(1.1cqw*var(--f,1));background:#ccc;color:#555;padding:calc(.5cqw*var(--f,1)) calc(1.4cqw*var(--f,1))}
+.old .pk-n{background:#e5484d;color:#fff}
+.r1{top:calc(6.4cqw*var(--f,1));left:52%}.r2{top:calc(10cqw*var(--f,1));left:6%}.r3{top:calc(39cqw*var(--f,1));left:5%;animation-delay:.2s}.r4{top:calc(46cqw*var(--f,1));left:12%;animation-delay:.4s}.r5{top:calc(37cqw*var(--f,1));left:58%;animation-delay:.6s}.r6{top:calc(54cqw*var(--f,1));left:40%;animation-delay:.8s}
+.new.pk{background:radial-gradient(60% 70% at 85% 0%,rgba(61,224,255,.16),transparent 60%),linear-gradient(180deg,#07131f,#0b2235);color:var(--text);display:block;padding:0}
+.pk-top{display:flex;justify-content:space-between;align-items:center;padding:calc(3cqw*var(--f,1)) calc(4cqw*var(--f,1))}
+.pk-top b{font-family:var(--serif);letter-spacing:.28em;font-size:calc(1.7cqw*var(--f,1));color:var(--text)}.pk-top b em{color:var(--aqua)}
+.pk-btn{display:inline-flex;align-items:center;justify-content:center;background:var(--signal);color:var(--ink);font-weight:700;border-radius:calc(.9cqw*var(--f,1))}
+.pk-btn.sm{font-size:calc(1.3cqw*var(--f,1));padding:calc(.8cqw*var(--f,1)) calc(1.5cqw*var(--f,1))}
+.pk-body{margin-left:44%;padding-right:calc(4cqw*var(--f,1))}
+.pk-h{font-family:var(--serif);font-size:calc(3.8cqw*var(--f,1));line-height:1.05;margin:calc(.6cqw*var(--f,1)) 0 calc(1.8cqw*var(--f,1))}.pk-h em{display:block;color:var(--aqua);font-style:italic}
+.pk-proj{display:flex;align-items:center;gap:calc(1.4cqw*var(--f,1));margin-bottom:calc(1.8cqw*var(--f,1))}
+.pk-water{width:calc(12cqw*var(--f,1));height:calc(7cqw*var(--f,1));border-radius:calc(.8cqw*var(--f,1));border:calc(.5cqw*var(--f,1)) solid #d9d2c3;background:repeating-linear-gradient(115deg,rgba(255,255,255,.0) 0 calc(1.4cqw*var(--f,1)),rgba(255,255,255,.28) calc(1.6cqw*var(--f,1)) calc(1.9cqw*var(--f,1)),rgba(255,255,255,0) calc(2.1cqw*var(--f,1)) calc(3.4cqw*var(--f,1))),linear-gradient(160deg,#5fe3ff,#1593c4);background-size:300% 100%,100% 100%;animation:pkWater 6s linear infinite;flex:none}
+.pk-proj span{font-size:calc(1.3cqw*var(--f,1));color:var(--soft)}
+.pk-cfg{padding:calc(1.6cqw*var(--f,1));border:1px solid rgba(61,224,255,.3);border-radius:calc(1.2cqw*var(--f,1));background:rgba(255,255,255,.03)}
+.pk-q{display:block;font-size:calc(1.25cqw*var(--f,1));color:var(--muted);margin-bottom:calc(1cqw*var(--f,1))}
+.pk-chips{display:flex;gap:calc(.9cqw*var(--f,1));margin-bottom:calc(1.3cqw*var(--f,1))}
+.pk-chips i{font-size:calc(1.25cqw*var(--f,1));padding:calc(.6cqw*var(--f,1)) calc(1.2cqw*var(--f,1));border-radius:99px;border:1px solid rgba(61,224,255,.3);color:var(--soft);animation:pkChip 9s infinite}
+.pk-chips i:nth-child(2){animation-delay:3s}.pk-chips i:nth-child(3){animation-delay:6s}
+.pk-price{display:grid}.pk-price b{grid-area:1/1;font-size:calc(1.8cqw*var(--f,1));color:var(--text);opacity:0;animation:pkPrice 9s infinite}
+.pk-price b:nth-child(2){animation-delay:3s}.pk-price b:nth-child(3){animation-delay:6s}
+.pk-btn.big{margin-top:calc(2cqw*var(--f,1));font-size:calc(1.7cqw*var(--f,1));padding:calc(1.4cqw*var(--f,1)) calc(2.6cqw*var(--f,1));animation:pkPulse 2.2s infinite}
+.pk-wa{position:absolute;left:calc(4cqw*var(--f,1));bottom:calc(6cqw*var(--f,1));max-width:34%;display:flex;gap:calc(1cqw*var(--f,1));align-items:flex-start;background:#123b2a;color:#d9f7e6;font-size:calc(1.3cqw*var(--f,1));line-height:1.35;padding:calc(1.3cqw*var(--f,1)) calc(1.5cqw*var(--f,1));border-radius:calc(1.5cqw*var(--f,1)) calc(1.5cqw*var(--f,1)) calc(1.5cqw*var(--f,1)) calc(.3cqw*var(--f,1));animation:pkWa 7s infinite}
+.pk-wa i{color:#3ddc97;font-weight:700}
+.new .pk-n{background:#0e2a22;color:#7dffb0;border:1px solid rgba(61,220,151,.45)}
+.g1{top:calc(10.5cqw*var(--f,1));left:5%}.g2{top:calc(18cqw*var(--f,1));left:9%;animation-delay:.2s}.g3{top:calc(25.5cqw*var(--f,1));left:5%;animation-delay:.4s}.g4{top:calc(33cqw*var(--f,1));left:12%;animation-delay:.6s}.g5{top:calc(40.5cqw*var(--f,1));left:6%;animation-delay:.8s}
+.cmp-layer.old{z-index:1}.cmp-layer.cmp-new{z-index:2}.cmp-handle{z-index:3}.cmp-range{z-index:4}
+@keyframes pkPop{from{opacity:0;transform:scale(.85)}}
+@keyframes pkSlide{to{background-position:-240% 0}}
+@keyframes pkDot{0%,30%{background:#fff}34%,100%{background:rgba(255,255,255,.5)}}
+@keyframes pkWater{to{background-position:-300% 0,0 0}}
+@keyframes pkChip{0%,30%{background:var(--aqua);color:var(--ink);border-color:var(--aqua)}34%,100%{background:none;color:var(--soft);border-color:rgba(61,224,255,.3)}}
+@keyframes pkPrice{0%,30%{opacity:1}34%,100%{opacity:0}}
+@keyframes pkPulse{0%,100%{box-shadow:0 0 0 0 rgba(212,255,58,.45)}60%{box-shadow:0 0 0 calc(1.4cqw*var(--f,1)) rgba(212,255,58,0)}}
+@keyframes pkWa{0%,15%{opacity:0;transform:translateY(calc(1.4cqw*var(--f,1))) scale(.95)}22%,92%{opacity:1;transform:none}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.pk *{animation:none!important}.pk-price b:first-child{opacity:1}}
+
+.cmp .tag{font-size:calc(1.3cqw*var(--f,1));padding:calc(.5cqw*var(--f,1)) calc(1cqw*var(--f,1))}
+@media(max-width:640px){.cmp{--f:1.75;aspect-ratio:3/4}.pk-body{margin-left:6%}.new .pk-n{display:none}.pk-wa{left:auto;right:4%;max-width:62%;bottom:12%}.pk-bar i{display:none}.pk-row{grid-template-columns:1fr}.pk-form{display:none}.r5{display:none}}
+
+@media (max-width:600px){.proof .live{float:none;display:flex;margin:.45rem 0 0}}
+
+.faq summary{overflow-wrap:anywhere}
+.faq summary{padding-right:.35rem}
 </style>
 <style>
 .vp{display:grid;grid-template-columns:1.05fr 1fr;gap:2.4rem;margin-top:2.6rem;padding:clamp(1.4rem,3vw,2.4rem);border:1px solid var(--signal);border-radius:22px;background:linear-gradient(135deg,rgba(212,255,58,.07),transparent 75%);box-shadow:0 0 60px rgba(0,0,0,.35);text-align:left}
@@ -1173,19 +1237,36 @@ kbd{font:600 .72rem var(--sans);background:#122a40;border:1px solid var(--line2)
       <p>Solda: bugün çoğu zanaatkâr web sitesinin hâli. İşletmeden bahseden bir hizmetler duvarı. Sağda: önce müşterinin sorusunu yanıtlayan ve ardından tam olarak tek bir eylem sunan bir sayfa. Kaydırıcıyı çekin.</p>
     </div>
     <div class="cmp" id="cmp">
-      <div class="cmp-layer old" aria-hidden="true">
+      <div class="cmp-layer old pk" aria-hidden="true">
+        <div class="pk-bar"><b>Mustermann Havuz</b><i><span>Ana sayfa</span><span>Firma</span><span>Havuzlar</span><span>Jakuziler</span><span>Saunalar</span><span>Aksesuarlar</span><span>Galeri</span><span>Haberler</span><span>İletişim</span></i></div>
+        <div class="pk-hero"><span>Banyonun dünyasına hoş geldiniz!</span><em><i></i><i></i><i></i></em></div>
+        <div class="pk-row">
+          <div class="pk-col"><p>Birçok şekil ve boyutta yüksek kaliteli yüzme havuzları sunuyoruz. Fiyatlar talep üzerine.</p><span class="pk-pdf">Katalog 2019 (PDF, 48 MB)</span></div>
+          <div class="pk-form"><b>Talep formu</b><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span>Gönder</span></div>
+        </div>
+        <span class="pk-n r1">1 · 9 menü öğesi, hedef yok</span>
+        <span class="pk-n r2">2 · Gerçek havuz yerine stok fotoğraf</span>
+        <span class="pk-n r3">3 · “Fiyat sorunuz” fiyat avcılarını çeker</span>
+        <span class="pk-n r4">4 · Danışmanlık yerine eski katalog</span>
+        <span class="pk-n r5">5 · 12 alanlı form</span>
+        <span class="pk-n r6">6 · Yanıt süresi yok, sonraki adım yok</span>
         <span class="tag tag-l">Tipik</span>
-        <div class="bar"><b>Mustermann GmbH</b><i><span>Ana sayfa</span><span>Hakkımızda</span><span>Hizmetler</span><span>Referanslar</span><span>Güncel</span><span>İletişim</span></i></div>
-        <div class="banner">Hoş geldiniz</div>
-        <div class="grid"><span>Isıtma</span><span>Sıhhi tesisat</span><span>Banyo</span><span>Bakım</span><span>Solar</span><span>Acil servis</span><span>Havalandırma</span><span>Danışmanlık</span><span>Yeni yapı</span><span>Renovasyon</span><span>Planlama</span><span>Servis</span></div>
-        <div class="txt">20 yılı aşkın süredir ev ve ısıtma konusunda yetkin ortağınızız. Talebinizi bekliyoruz.</div>
       </div>
-      <div class="cmp-layer cmp-new new" aria-hidden="true">
+      <div class="cmp-layer cmp-new new pk" aria-hidden="true">
+        <div class="pk-top"><b>MUSTERMANN <em>HAVUZ</em></b><span class="pk-btn sm">Ücretsiz planlama</span></div>
+        <div class="pk-body">
+          <div class="pk-h">Bodrum’da havuzunuz. <em>Yaza hazır.</em></div>
+          <div class="pk-proj"><div class="pk-water"></div><span>Proje Milas · 8 × 4 m · 6 haftada inşa edildi</span></div>
+          <div class="pk-cfg"><span class="pk-q">Hangi boyut?</span><span class="pk-chips"><i>6 × 3 m</i><i>8 × 4 m</i><i>10 × 4 m</i></span><span class="pk-price"><b>Fiyat aralığı: 32.000–38.000 €</b><b>Fiyat aralığı: 45.000–55.000 €</b><b>Fiyat aralığı: 58.000–70.000 €</b></span></div>
+          <span class="pk-btn big">Fiyat aralığınızı alın →</span>
+        </div>
+        <div class="pk-wa"><i>✓</i>Teşekkürler! Bugün saat 17’ye kadar fiyat aralığınızla sizi arıyoruz.</div>
+        <span class="pk-n g1">✓ Başlıkta sonuç ve zamanlama</span>
+        <span class="pk-n g2">✓ Boyut ve inşa süresiyle gerçek proje</span>
+        <span class="pk-n g3">✓ Boyuta göre fiyat aralığı</span>
+        <span class="pk-n g4">✓ Tek hedef, tek buton</span>
+        <span class="pk-n g5">✓ Saniyeler içinde yanıt</span>
         <span class="tag tag-r">VANTOR</span>
-        <span class="m-logo">MUSTERMANN</span>
-        <h4>Kombi mi arızalandı? Bugün hâlâ biri gelir.</h4>
-        <p class="sub">Arayın. Mesai saatleri dışında da size dönüş yaparız.</p>
-        <span class="m-btn">Hemen arayın</span>
       </div>
       <input class="cmp-range" id="cmp-range" type="range" min="0" max="100" value="50" aria-label="Karşılaştırma kaydırıcısı: solda tipik web sitesi, sağda VANTOR web sitesi">
       <div class="cmp-handle"></div>
