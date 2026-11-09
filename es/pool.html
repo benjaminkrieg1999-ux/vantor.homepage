@@ -1874,30 +1874,58 @@ $("#ad-b").value = "pool";
   $$("a", nav).forEach(a => a.addEventListener("click", () => { nav.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); }));
 })();
 
-/* hero water */
+/* hero water: WebGL in voller Auflösung, Canvas-2D nur als Rückfall */
 (() => {
   const c = $("#water"); if (!c) return;
-  const ctx = c.getContext("2d", { alpha: false });
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const S = 6; let w = 0, h = 0, img, last = 0, visible = true, px = .72, py = .35, tpx = .72, tpy = .35;
+  let px = .72, py = .35, tpx = .72, tpy = .35, visible = true, last = 0;
   c.parentElement.addEventListener("pointermove", e => { const r = c.getBoundingClientRect(); tpx = (e.clientX - r.left) / r.width; tpy = (e.clientY - r.top) / r.height; });
   const P = Array.from({ length: 5 }, (_, i) => [1.3 + i * 2.1, 2.7 + i * 1.7, 4.1 + i * .9, 5.3 + i * 1.3]);
-  function size() { const r = c.getBoundingClientRect(); w = Math.max(60, Math.ceil(r.width / S)); h = Math.max(40, Math.ceil(r.height / S)); c.width = w; c.height = h; img = ctx.createImageData(w, h); draw(performance.now()); }
-  function draw(now) {
-    const t = now / 1000 * .13, d = img.data; px += (tpx - px) * .08; py += (tpy - py) * .08;
-    for (let y = 0; y < h; y++) { const ty = y / h, v0 = ty * 4.2;
-      for (let x = 0; x < w; x++) { const tx = x / w; let a = tx * 9, b = v0, val = 0;
-        for (let i = 0; i < 5; i++) { const p = P[i];
-          const a2 = a + .55 * Math.sin(b * 1.7 + p[0] + t * (1 + i * .2)); const b2 = b + .55 * Math.sin(a * 1.3 + p[1] - t * (.8 + i * .15));
-          a = a2; b = b2; val += Math.sin(a * (1.3 + .35 * i) + p[2]) + Math.cos(b * (1.1 + .3 * i) + p[3]); }
-        let k = 1 - Math.abs(Math.sin(val * .9)); if (k < 0) k = 0;
-        const k2 = k * k, k4 = k2 * k2, k9 = k4 * k4 * k;
-        const ddx = tx - px, ddy = (ty - py) * .6, pl = Math.exp(-(ddx * ddx + ddy * ddy) * 26);
-        const g = k9 * (.2 + .8 * Math.pow(tx, 1.2)) * (1 - .5 * ty) + pl * (k4 * .9 + .08), m = .35 + .65 * tx * (1 - .5 * ty), teal = tx * tx * .55, o = (y * w + x) * 4;
-        d[o] = Math.min(255, 7 + 4 * m + 15 * teal + g * 135); d[o + 1] = Math.min(255, 19 + 23 * m + 101 * teal + g * 216); d[o + 2] = Math.min(255, 31 + 37 * m + 119 * teal + g * 230); d[o + 3] = 255; } }
-    ctx.putImageData(img, 0, 0);
+  const gl = c.getContext("webgl", { alpha: false, antialias: false, powerPreference: "low-power" });
+  let draw, size;
+  if (gl) {
+    const FS = `precision highp float;uniform vec2 R;uniform float T;uniform vec2 M;uniform vec4 P[5];
+void main(){vec2 uv=gl_FragCoord.xy/R;float tx=uv.x,ty=1.0-uv.y,a=tx*9.0,b=ty*4.2,v=0.0;
+for(int i=0;i<5;i++){vec4 p=P[i];float fi=float(i);float a2=a+.55*sin(b*1.7+p.x+T*(1.0+fi*.2));float b2=b+.55*sin(a*1.3+p.y-T*(.8+fi*.15));a=a2;b=b2;v+=sin(a*(1.3+.35*fi)+p.z)+cos(b*(1.1+.3*fi)+p.w);}
+float k=max(0.0,1.0-abs(sin(v*.9)));float k2=k*k,k4=k2*k2,k9=k4*k4*k;
+float dx=tx-M.x,dy=(ty-M.y)*.6;float pl=exp(-(dx*dx+dy*dy)*26.0);
+float g=k9*(.2+.8*pow(tx,1.2))*(1.0-.5*ty)+pl*(k4*.9+.08);float m=.35+.65*tx*(1.0-.5*ty);float te=tx*tx*.55;
+vec3 col=vec3(7.0+4.0*m+15.0*te+g*135.0,19.0+23.0*m+101.0*te+g*216.0,31.0+37.0*m+119.0*te+g*230.0)/255.0;
+gl_FragColor=vec4(min(col,1.0),1.0);}`;
+    const VS = "attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}";
+    const sh = (t, src) => { const o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); return o; };
+    const pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, FS)); gl.linkProgram(pr);
+    if (gl.getProgramParameter(pr, gl.LINK_STATUS)) {
+      gl.useProgram(pr);
+      const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+      const loc = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+      const uR = gl.getUniformLocation(pr, "R"), uT = gl.getUniformLocation(pr, "T"), uM = gl.getUniformLocation(pr, "M");
+      gl.uniform4fv(gl.getUniformLocation(pr, "P"), new Float32Array(P.flat()));
+      const mobile = matchMedia("(max-width: 760px)").matches;
+      size = () => { const r = c.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 2); c.width = Math.max(2, Math.round(r.width * dpr)); c.height = Math.max(2, Math.round(r.height * dpr)); gl.viewport(0, 0, c.width, c.height); gl.uniform2f(uR, c.width, c.height); draw(performance.now()); };
+      draw = now => { px += (tpx - px) * .08; py += (tpy - py) * .08; gl.uniform1f(uT, now / 1000 * .13); gl.uniform2f(uM, px, py); gl.drawArrays(gl.TRIANGLES, 0, 3); };
+    }
   }
-  function loop(now) { requestAnimationFrame(loop); if (!visible || now - last < 45) return; last = now; draw(now); }
+  if (!draw) {
+    const ctx = c.getContext("2d", { alpha: false }); if (!ctx) return;
+    const S = 4; let w = 0, h = 0, img;
+    size = () => { const r = c.getBoundingClientRect(); w = Math.max(60, Math.ceil(r.width / S)); h = Math.max(40, Math.ceil(r.height / S)); c.width = w; c.height = h; img = ctx.createImageData(w, h); draw(performance.now()); };
+    draw = now => {
+      const t = now / 1000 * .13, d = img.data; px += (tpx - px) * .08; py += (tpy - py) * .08;
+      for (let y = 0; y < h; y++) { const ty = y / h, v0 = ty * 4.2;
+        for (let x = 0; x < w; x++) { const tx = x / w; let a = tx * 9, b = v0, val = 0;
+          for (let i = 0; i < 5; i++) { const p = P[i];
+            const a2 = a + .55 * Math.sin(b * 1.7 + p[0] + t * (1 + i * .2)); const b2 = b + .55 * Math.sin(a * 1.3 + p[1] - t * (.8 + i * .15));
+            a = a2; b = b2; val += Math.sin(a * (1.3 + .35 * i) + p[2]) + Math.cos(b * (1.1 + .3 * i) + p[3]); }
+          let k = 1 - Math.abs(Math.sin(val * .9)); if (k < 0) k = 0;
+          const k2 = k * k, k4 = k2 * k2, k9 = k4 * k4 * k;
+          const ddx = tx - px, ddy = (ty - py) * .6, pl = Math.exp(-(ddx * ddx + ddy * ddy) * 26);
+          const g = k9 * (.2 + .8 * Math.pow(tx, 1.2)) * (1 - .5 * ty) + pl * (k4 * .9 + .08), m = .35 + .65 * tx * (1 - .5 * ty), teal = tx * tx * .55, o = (y * w + x) * 4;
+          d[o] = Math.min(255, 7 + 4 * m + 15 * teal + g * 135); d[o + 1] = Math.min(255, 19 + 23 * m + 101 * teal + g * 216); d[o + 2] = Math.min(255, 31 + 37 * m + 119 * teal + g * 230); d[o + 3] = 255; } }
+      ctx.putImageData(img, 0, 0);
+    };
+  }
+  function loop(now) { requestAnimationFrame(loop); if (!visible || now - last < 33) return; last = now; draw(now); }
   size(); addEventListener("resize", () => { clearTimeout(size._t); size._t = setTimeout(size, 150); });
   if (!reduce) { new IntersectionObserver(e => { visible = e[0].isIntersecting; }).observe(c); document.addEventListener("visibilitychange", () => { visible = !document.hidden; }); requestAnimationFrame(loop); }
 })();
