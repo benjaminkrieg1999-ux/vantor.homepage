@@ -1101,6 +1101,8 @@ kbd{font:600 .72rem var(--sans);background:#122a40;border:1px solid var(--line2)
 
 .faq summary{overflow-wrap:anywhere}
 .faq summary{padding-right:.35rem}
+.cmp-range{-webkit-appearance:none;appearance:none;background:transparent;top:0;bottom:0;left:0;right:0;height:auto;touch-action:pan-y}.cmp-range::-webkit-slider-thumb{-webkit-appearance:none;width:44px;height:100vh;background:transparent}.cmp-range::-moz-range-thumb{width:44px;height:600px;background:transparent;border:0}
+.cmp-range{height:62.5cqw!important}@media(max-width:640px){.cmp-range{height:133.4cqw!important}}
 </style>
 <style>
 .vp{display:grid;grid-template-columns:1.05fr 1fr;gap:2.4rem;margin-top:2.6rem;padding:clamp(1.4rem,3vw,2.4rem);border:1px solid var(--signal);border-radius:22px;background:linear-gradient(135deg,rgba(212,255,58,.07),transparent 75%);box-shadow:0 0 60px rgba(0,0,0,.35);text-align:left}
@@ -2147,7 +2149,9 @@ function adHTML(F, bk, S, U, v, acc) {
 })();
 
 /* compare */
-(() => { const box = $("#cmp"), r = $("#cmp-range"); const set = () => box.style.setProperty("--pos", r.value + "%"); r.addEventListener("input", set); set(); })();
+(() => { const box = $("#cmp"), r = $("#cmp-range"); if (!box || !r) return; const set = () => box.style.setProperty("--pos", r.value + "%"); r.addEventListener("input", set); set();
+  let drag = false; const at = e => { const b = box.getBoundingClientRect(); r.value = Math.max(0, Math.min(100, (e.clientX - b.left) / b.width * 100)); set(); };
+  box.addEventListener("pointerdown", e => { drag = true; at(e); }); addEventListener("pointermove", e => { if (drag) at(e); }); addEventListener("pointerup", () => { drag = false; }); })();
 
 /* ================= KONFIGURATOR ================= */
 const S = { goal: "anfragen", firma: "Mustermann", stadt: "Stuttgart", br: "pool", wert: 45000, marge: 25, look: "dark", acc: ACCENTS[0], scope: "lp", mods: ["google", "meta"], care: "pausch", ads: 1500, view: "site", dev: "desk" };
