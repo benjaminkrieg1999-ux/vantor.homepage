@@ -889,6 +889,7 @@ body.loading{overflow:hidden}
 .vx .closing p{color:var(--soft);margin:1.3rem 0 2rem}
 .vx .frame{background:var(--panel);border:1px solid var(--line);border-radius:16px;min-height:12rem;display:grid;place-items:center;padding:1.5rem;text-align:center}
 .vx .frame iframe{width:100%;height:46rem;border:0;border-radius:12px;background:#fff}
+@media(max-width:640px){.vx .frame iframe{height:52rem}}
 .vx .contact{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(2rem,6vw,6rem);align-items:start}
 .vx .contact dl{margin:2rem 0 0;display:grid;gap:1.2rem}
 .vx .contact dt{color:var(--muted);font-size:.88rem}
@@ -1503,6 +1504,12 @@ body.loading{overflow:hidden}
 @media(max-width:640px){.vx .cmp{--f:1.75;aspect-ratio:3/4}.vx .pk-body{margin-left:6%}.vx .new .pk-n{display:none}.vx .pk-wa{left:auto;right:4%;max-width:62%;bottom:12%}.vx .pk-bar i{display:none}.vx .pk-row{grid-template-columns:1fr}.vx .pk-form{display:none}.vx .r5{display:none}}
 @media (max-width:600px){.vx .proof .live{float:none;display:flex;margin:.45rem 0 0}}
 .vx .faq summary{overflow-wrap:anywhere}
+.vx .faq summary{padding-right:.35rem}
+.vx .cmp-range{-webkit-appearance:none;appearance:none;background:transparent;top:0;bottom:0;left:0;right:0;height:auto;touch-action:pan-y}
+.vx .cmp-range::-webkit-slider-thumb{-webkit-appearance:none;width:44px;height:100vh;background:transparent}
+.vx .cmp-range::-moz-range-thumb{width:44px;height:600px;background:transparent;border:0}
+.vx .cmp-range{height:62.5cqw!important}
+@media(max-width:640px){.vx .cmp-range{height:133.4cqw!important}}
 .vx .two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
 .audit-r .vx .out{background:var(--ink2);min-height:12rem}
 .mx-lead{font-size:.95rem;color:var(--t2);max-width:640px;line-height:1.75;font-weight:300;margin:0 0 2.2rem}
@@ -2369,8 +2376,8 @@ body.loading{overflow:hidden}
     <div class="zeeg-frame" data-r data-d="2">
       <!-- Zeeg inline embed begins -->
       <div class="zeeg-inline-widget" id="zeeg-embed-krieg-30min" style="min-width:320px"></div>
-      <div class="zgate" id="zgate"><p class="zg-t">Der Kalender wird von Zeeg geladen.</p><p class="zg-s">Erst mit deinem Klick wird eine Verbindung zu Zeeg hergestellt. Mehr dazu in der <a href="/datenschutz#termin">Datenschutzerklärung</a>.</p><button type="button" class="zg-b" id="zgate-b">Freie Termine anzeigen</button><a class="zg-l" href="https://zeeg.me/krieg/30min" target="_blank" rel="noopener">oder direkt bei Zeeg öffnen ↗</a></div>
-      <script>document.getElementById("zgate-b").addEventListener("click",function(){var g=document.getElementById("zgate");g.remove();var t=document.createElement("script");t.src="https://assets.zeeg.me/embed.min.js";t.async=true;var a={"data-user":"krieg","data-event-type":"30min","data-redirect-parent":"true","data-background-color":"0F0F16","data-background-opacity":"50","data-text-color":"F0F0F2","data-primary-color":"C8FF0A"};for(var k in a)t.setAttribute(k,a[k]);var w=document.getElementById("zeeg-embed-krieg-30min");w.style.minHeight="780px";w.after(t);});</script>
+      <div class="zgate" id="zgate"><p class="zg-t">Such dir deinen Termin aus.</p><p class="zg-s">Der Kalender kommt von Google. Erst mit deinem Klick wird eine Verbindung zu Google hergestellt. Mehr dazu in der <a href="/datenschutz#termin">Datenschutzerklärung</a>.</p><button type="button" class="zg-b" id="zgate-b">Freie Termine anzeigen</button><a class="zg-l" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ17DurT1lX7L6rdMrscUlQUWcEaCeO-tzjt17DRjuV7jvV_nHwa3HpvQwydRkU5xzEdRjNM9tkt" target="_blank" rel="noopener">oder in neuem Fenster öffnen ↗</a></div>
+      <script>document.getElementById("zgate-b").addEventListener("click",function(){var g=document.getElementById("zgate");g.remove();var w=document.getElementById("zeeg-embed-krieg-30min");var f=document.createElement("iframe");f.src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ17DurT1lX7L6rdMrscUlQUWcEaCeO-tzjt17DRjuV7jvV_nHwa3HpvQwydRkU5xzEdRjNM9tkt?gv=true";f.title="Terminbuchung";f.style.cssText="width:100%;height:760px;border:0;border-radius:16px;background:#fff;display:block";w.appendChild(f);});</script>
       <!-- Zeeg inline embed ends -->
     </div>
 
@@ -2409,11 +2416,11 @@ body.loading{overflow:hidden}
 
       <div class="cnt-fw" data-r="r">
         <form id="cf" novalidate>
-          <input type="hidden" name="access_key" value="e79e1bc0-75d6-4793-824f-63a0dc61c5d2"/>
-          <input type="hidden" name="subject" value="Neue Anfrage über vantor-marketing.com"/>
+          <input type="hidden" name="_cc" value="falk@vantor-marketing.com"/><input type="hidden" name="_captcha" value="false"/><input type="hidden" name="_template" value="table"/><input type="hidden" name="seite" value="/"/>
+          <input type="hidden" name="_subject" value="Neue Anfrage über vantor-marketing.com"/>
           <input type="hidden" name="from_name" value="VANTOR Website"/>
-          <input type="hidden" name="replyto" id="replyto"/>
-          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off"/>
+          <input type="hidden" name="_replyto" id="replyto"/>
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off"/>
           <div class="fr">
             <div class="fg"><label>Name *</label><input type="text" name="name" required placeholder="Dein Name" autocomplete="name"/></div>
             <div class="fg"><label>Telefon *</label><input type="tel" inputmode="tel" name="phone" required placeholder="Für Rückruf" autocomplete="tel"/></div>
@@ -2504,7 +2511,7 @@ body.loading{overflow:hidden}
    ================================================================ */
 const WA_NUMBER     = "4917661039764";
 const WEB3FORMS_KEY = "e79e1bc0-75d6-4793-824f-63a0dc61c5d2";
-const BOOKING_URL   = "https://zeeg.me/krieg/30min";
+const BOOKING_URL   = "https://calendar.google.com/calendar/appointments/schedules/AcZssZ17DurT1lX7L6rdMrscUlQUWcEaCeO-tzjt17DRjuV7jvV_nHwa3HpvQwydRkU5xzEdRjNM9tkt?gv=true";
 const PSI_KEY       = "AIzaSyBD-Qe1lN7XD_6LahfAgClAkkjwQ1ctRcc";   // optional: eigener Google-PageSpeed-API-Key (kostenlos, hebt das Limit). Auf Domain beschränken.
 const MAIL_TO       = "info@vantor-marketing.com";
 
@@ -3679,9 +3686,9 @@ document.querySelectorAll('.faqq').forEach(b => {
     btn.disabled = true;
     btn.textContent = 'Wird gesendet...';
     try {
-      const r = await fetch('https://api.web3forms.com/submit', {method:'POST', body: new FormData(form)});
+      const r = await fetch('https://formsubmit.co/ajax/ben@vantor-marketing.com', {method:'POST', headers:{Accept:'application/json'}, body: new FormData(form)});
       const j = await r.json();
-      if (j.success) {
+      if (r.ok && String(j.success) === 'true') { try { window.vxLead && window.vxLead(); } catch (_) {}
         btn.textContent = '✓ Anfrage gesendet!';
         btn.style.background = '#1a5c3a';
         btn.style.color = '#fff';

@@ -395,6 +395,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 .closing p{color:var(--soft);margin:1.3rem 0 2rem}
 .frame{background:var(--panel);border:1px solid var(--line);border-radius:16px;min-height:12rem;display:grid;place-items:center;padding:1.5rem;text-align:center}
 .frame iframe{width:100%;height:46rem;border:0;border-radius:12px;background:#fff}
+@media(max-width:640px){.frame iframe{height:52rem}}
 
 .contact{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(2rem,6vw,6rem);align-items:start}
 .contact dl{margin:2rem 0 0;display:grid;gap:1.2rem}
@@ -1674,7 +1675,7 @@ kbd{font:600 .72rem var(--sans);background:#122a40;border:1px solid var(--line2)
     </div>
     <div class="frame" id="frame">
       <div><button class="btn btn-signal" type="button" id="load-cal">Cargar calendario</button>
-      <p class="note" style="margin:1rem auto 0">Al cargarlo se integra el servicio de calendario Zeeg.</p></div>
+      <p class="note" style="margin:1rem auto 0">Al cargar se integra el calendario de reservas de Google.</p></div>
     </div>
   </div>
 </section>
@@ -1884,7 +1885,7 @@ kbd{font:600 .72rem var(--sans);background:#122a40;border:1px solid var(--line2)
    ================================================================ */
 const WA_NUMBER     = "4917661039764";
 const WEB3FORMS_KEY = "e79e1bc0-75d6-4793-824f-63a0dc61c5d2";
-const BOOKING_URL   = "https://zeeg.me/krieg/30min";
+const BOOKING_URL   = "https://calendar.google.com/calendar/appointments/schedules/AcZssZ17DurT1lX7L6rdMrscUlQUWcEaCeO-tzjt17DRjuV7jvV_nHwa3HpvQwydRkU5xzEdRjNM9tkt?gv=true";
 const PSI_KEY       = "AIzaSyBD-Qe1lN7XD_6LahfAgClAkkjwQ1ctRcc";   // optional: eigener Google-PageSpeed-API-Key (kostenlos, hebt das Limit). Auf Domain beschränken.
 const MAIL_TO       = "info@vantor-marketing.com";
 
@@ -2452,9 +2453,9 @@ $("#a-pdf").addEventListener("click", () => {
     const cfg = $("#cf-cfg").classList.contains("on") ? summaryText() + "\nEnlace: " + location.href.split("#")[0] + "#cfg=" + encodeState() : "";
     btn.disabled = true; btn.textContent = "Enviando …"; say("");
     try {
-      const res = await fetch("https://api.web3forms.com/submit", { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject: "Nueva solicitud: vantor-marketing.com" + (cfg ? " (con configuración)" : ""), from_name: "Web de VANTOR", replyto: fd.get("email") || undefined, name: fd.get("name"), phone: fd.get("phone"), email: fd.get("email"), branche: fd.get("branche"), budget: fd.get("budget"), message: fd.get("message"), konfiguration: cfg, botcheck: "" }) });
-      const j = await res.json(); if (!j.success) throw new Error("fail");
+      const res = await fetch("https://formsubmit.co/ajax/ben@vantor-marketing.com", { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ _cc: "falk@vantor-marketing.com", _captcha: "false", _template: "table", _subject: "Neue Anfrage: vantor-marketing.com/pool" + (cfg ? " (con configuración)" : ""), _replyto: fd.get("email") || undefined, seite: location.pathname, name: fd.get("name"), phone: fd.get("phone"), email: fd.get("email"), branche: fd.get("branche"), budget: fd.get("budget"), message: fd.get("message"), konfiguration: cfg, _honey: "" }) });
+      const j = await res.json(); if (!res.ok || String(j.success) !== "true") throw new Error("fail"); try { window.vxLead && window.vxLead(); } catch (_) {}
       form.reset(); $("#cf-cfg").classList.remove("on"); say("Gracias, tu solicitud ha llegado. Te respondemos en menos de 4 horas.", "ok");
     } catch (_) {
       const body = [`Nombre: ${fd.get("name")}`, `Teléfono: ${fd.get("phone")}`, `Sector: ${fd.get("branche")}`, "", fd.get("message") || "", "", cfg].join("\n");
@@ -2679,7 +2680,7 @@ SIM.rebuild(false);
     ["Indica tu presupuesto, recibe tu paquete", "Configurador", () => { $("#m-budget").click(); go("#konfigurator")(); }, "presupuesto dinero"],
     ["Reproducir simulación en directo", "Del clic al encargo", () => { go("#simulation")(); setTimeout(() => { $("#sim-play").textContent !== "Pausa" && $("#sim-play").click(); }, 600); }, "demo proceso simulación móvil"],
     ["Caso de éxito: 328.000 €", "Jelić Galabau", go("#pool"), "referencia resultado cliente"],
-    ["Reservar cita", "15 minutos", go("#termin"), "calendario primera reunión cita zeeg"],
+    ["Reservar cita", "15 minutos", go("#termin"), "calendario primera llamada google"],
     ["Escribir por WhatsApp", "Directo", () => open(waLink("Hola VANTOR, tengo una pregunta."), "_blank"), "chat mensaje"],
     ["Llamar", "+49 176 6103 9764", () => { location.href = "tel:+4917661039764"; }, "teléfono llamar"],
     ["Preguntas y respuestas", "FAQ", go("#faq"), "faq ayuda preguntas"]

@@ -39,7 +39,7 @@ window.VX_TRACKING = window.VX_TRACKING || {
     o.landing = location.pathname; o.lang = lang; return o;
   }
   document.addEventListener("submit", function (e) {
-    var f = e.target; if (!f || !f.querySelector || !f.querySelector('input[name="access_key"]')) return;
+    var f = e.target; if (!f || !f.querySelector || !f.querySelector('input[name="_cc"],input[name="access_key"]')) return;
     var o = params();
     Object.keys(o).forEach(function (k) { if (f.querySelector('input[name="' + k + '"]')) return; var i = document.createElement("input"); i.type = "hidden"; i.name = k; i.value = o[k]; f.appendChild(i); });
   }, true);
@@ -69,15 +69,15 @@ window.VX_TRACKING = window.VX_TRACKING || {
     var h = a.getAttribute("href") || "";
     if (/wa\.me|whatsapp/.test(h)) first("contact_wa", C.adsContactLabel), fire("contact");
     else if (/^tel:/.test(h)) first("contact_tel", C.adsContactLabel), fire("contact");
-    else if (/zeeg\.me/.test(h) || a.id === "zgate-b" || /book|termin/i.test(a.id || "")) fire("schedule", C.adsContactLabel);
+    else if (/zeeg\.me|calendar\.google|calendar\.app\.google/.test(h) || a.id === "zgate-b" || /book|termin/i.test(a.id || "")) fire("schedule", C.adsContactLabel);
   }, true);
   document.addEventListener("input", function (e) { if (e.target.closest && e.target.closest(".cfg-ctrl,#konfigurator")) first("configurator_start"); }, true);
   document.addEventListener("change", function (e) { if (e.target.closest && e.target.closest(".cfg-ctrl,#konfigurator")) first("configurator_start"); }, true);
-  /* Formular erfolgreich gesendet (web3forms) */
+  /* Formular erfolgreich gesendet (FormSubmit) */
   var of = window.fetch;
   if (of) window.fetch = function (u, o) {
     var p = of.apply(this, arguments);
-    try { if (String(u).indexOf("api.web3forms.com") > -1) p.then(function (r) { if (r && r.ok) fire("generate_lead", C.adsLeadLabel); }); } catch (e) {}
+    try { if (/api\.web3forms\.com|formsubmit\.co\/ajax/.test(String(u))) p.then(function (r) { if (r && r.ok) r.clone().json().then(function (j) { if (String(j.success) === "true") fire("generate_lead", C.adsLeadLabel); }).catch(function () {}); }); } catch (e) {}
     return p;
   };
 
