@@ -3797,7 +3797,7 @@ w.querySelector('.vf-re').addEventListener('click',function(){v.currentTime=0;pl
 w.querySelector('.vf-play').addEventListener('click',play);
 snd.addEventListener('click',function(){v.muted=!v.muted;snd.setAttribute('aria-pressed',String(!v.muted));if(v.paused&&!w.classList.contains('done'))play()});
 if('IntersectionObserver'in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&e.intersectionRatio>.2)load();if(e.intersectionRatio>.55&&!started){started=true;if(red)w.classList.add('needplay');else play()}})},{threshold:[0,.2,.55]}).observe(w)}else{w.classList.add('needplay')}
-var k=document.getElementById('konfigurator');if(!k)return;k.classList.add('mx-closed');
+var k=document.getElementById('konfigurator');function fail(){var s=document.getElementById('film');if(s)s.style.display='none';if(k)k.classList.remove('mx-closed')}var pi=new Image();pi.onerror=fail;pi.src=v.poster;v.addEventListener('error',fail);if(!k)return;k.classList.add('mx-closed');
 function open(){if(!k.classList.contains('mx-closed'))return;k.classList.remove('mx-closed');setTimeout(function(){dispatchEvent(new Event('resize'))},30)}
 document.getElementById('mx-open').addEventListener('click',function(){open();k.scrollIntoView({behavior:'smooth'})});
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href="#konfigurator"]');if(a)open()},true);
