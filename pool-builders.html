@@ -133,7 +133,7 @@ footer{border-top:1px solid var(--line);padding:2rem 1.25rem 6rem;text-align:cen
 <footer><a href="/en/pool">VANTOR Pool</a><a href="/impressum">Legal notice</a><a href="/datenschutz">Privacy</a><a href="/agb">Terms</a></footer>
 <div class="stk"><a class="btn btn-s" href="#analyse">Start enquiry analysis</a><a class="btn btn-g wa" href="https://wa.me/4917661039764?text=Hello VANTOR, I’m a pool builder and I’m interested in your enquiry system." target="_blank" rel="noopener" aria-label="WhatsApp">💬</a></div>
 
-<script>window.__L={"step": "Question", "of": "of", "next": "Next", "send": "Request analysis"};
+<script>window.__L={"step": "Question", "of": "of", "next": "Next", "send": "Request analysis", "wa": "Hello VANTOR, I’m a pool builder and I’m interested in your enquiry system."};
 (function(){var C=window.__L,$=function(s,r){return(r||document).querySelector(s)},$$=function(s,r){return[].slice.call((r||document).querySelectorAll(s))};
 var f=$('#qf'),steps=$$('.qs',f),n=steps.length,i=0,bar=$('.qbar i'),cnt=$('.qc'),nav=$('.qn'),next=$('#qnext'),back=$('#qback');
 function show(k){i=k;steps.forEach(function(s,j){s.classList.toggle('on',j===i)});bar.style.width=((i+1)/n*100)+'%';cnt.textContent=C.step+' '+(i+1)+' '+C.of+' '+n;nav.classList.toggle('back',i>0);next.textContent=i===n-1?C.send:C.next;validate();var inp=$('input',steps[i]);if(inp&&i>0)setTimeout(function(){inp.focus({preventScroll:true})},60)}
@@ -147,7 +147,7 @@ f.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.tagName===
 f.addEventListener('submit',function(e){e.preventDefault();if(f._honey&&f._honey.value)return;
 steps.forEach(function(s,j){var q=s.dataset.q;if(q){var h=f.querySelector('input[name="q'+j+'"]');if(!h){h=document.createElement('input');h.type='hidden';h.name='q'+j;f.appendChild(h)}h.value=q+': '+val(s)}});
 var fd=new FormData(f);next.disabled=true;
-fetch('https://formsubmit.co/ajax/ben@vantor-marketing.com',{method:'POST',headers:{Accept:'application/json'},body:fd}).then(function(r){return r.json().then(function(j){var ok=r.ok&&String(j.success)==='true';if(ok&&window.vxLead)window.vxLead();return ok})}).catch(function(){return false}).then(function(ok){if(ok){$('.qwrap').style.display='none';$('.ok').classList.add('on')}else{$('.err').classList.add('on');next.disabled=false}})});
+fetch('https://formsubmit.co/ajax/c274886d6d7f2b52184b3a12db0437f3',{method:'POST',headers:{Accept:'application/json'},body:fd}).then(function(r){return r.json().then(function(j){var ok=r.ok&&String(j.success)==='true';if(ok&&window.vxLead)window.vxLead();return ok})}).catch(function(){return false}).then(function(ok){if(ok){$('.qwrap').style.display='none';$('.ok').classList.add('on')}else{var t=[];fd.forEach(function(v,k){if(k.charAt(0)!=='_'&&v)t.push(k+': '+v)});var l=$('.err a');if(l)l.href=l.href.split('?')[0]+'?text='+encodeURIComponent(C.wa+'\n\n'+t.join('\n'));$('.err').classList.add('on');next.disabled=false}})});
 show(0);
 var stk=$('.stk'),an=$('#analyse');if(stk&&an&&'IntersectionObserver'in window){new IntersectionObserver(function(es){stk.style.display=es[0].isIntersecting?'none':''}).observe(an)}$$('a[href="#analyse"]').forEach(function(a){a.addEventListener('click',function(){setTimeout(function(){var b=$('.opts button',steps[0]);b&&b.focus({preventScroll:true})},500)})});
 })();

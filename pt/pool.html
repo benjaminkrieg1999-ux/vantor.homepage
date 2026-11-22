@@ -1104,6 +1104,10 @@ kbd{font:600 .72rem var(--sans);background:#122a40;border:1px solid var(--line2)
 .faq summary{padding-right:.35rem}
 .cmp-range{-webkit-appearance:none;appearance:none;background:transparent;top:0;bottom:0;left:0;right:0;height:auto;touch-action:pan-y}.cmp-range::-webkit-slider-thumb{-webkit-appearance:none;width:44px;height:100vh;background:transparent}.cmp-range::-moz-range-thumb{width:44px;height:600px;background:transparent;border:0}
 .cmp-range{height:62.5cqw!important}@media(max-width:640px){.cmp-range{height:133.4cqw!important}}
+
+.welcome{top:auto;bottom:1.2rem;transform:translate(-50%,calc(100% + 2rem));opacity:0;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .4s;flex-wrap:nowrap;width:max-content;max-width:min(40rem,calc(100% - 2rem))}
+.welcome.on{transform:translate(-50%,0);opacity:1}
+@media(max-width:700px){.welcome{flex-wrap:wrap;bottom:5.6rem;font-size:.86rem}}
 </style>
 <style>
 .vp{display:grid;grid-template-columns:1.05fr 1fr;gap:2.4rem;margin-top:2.6rem;padding:clamp(1.4rem,3vw,2.4rem);border:1px solid var(--signal);border-radius:22px;background:linear-gradient(135deg,rgba(212,255,58,.07),transparent 75%);box-shadow:0 0 60px rgba(0,0,0,.35);text-align:left}
@@ -2453,14 +2457,14 @@ $("#a-pdf").addEventListener("click", () => {
     const cfg = $("#cf-cfg").classList.contains("on") ? summaryText() + "\nLink: " + location.href.split("#")[0] + "#cfg=" + encodeState() : "";
     btn.disabled = true; btn.textContent = "A enviar …"; say("");
     try {
-      const res = await fetch("https://formsubmit.co/ajax/ben@vantor-marketing.com", { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+      const res = await fetch("https://formsubmit.co/ajax/c274886d6d7f2b52184b3a12db0437f3", { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({ _cc: "falk@vantor-marketing.com", _captcha: "false", _template: "table", _subject: "Neue Anfrage: vantor-marketing.com/pool" + (cfg ? " (com configuração)" : ""), _replyto: fd.get("email") || undefined, seite: location.pathname, name: fd.get("name"), phone: fd.get("phone"), email: fd.get("email"), branche: fd.get("branche"), budget: fd.get("budget"), message: fd.get("message"), konfiguration: cfg, _honey: "" }) });
       const j = await res.json(); if (!res.ok || String(j.success) !== "true") throw new Error("fail"); try { window.vxLead && window.vxLead(); } catch (_) {}
       form.reset(); $("#cf-cfg").classList.remove("on"); say("Obrigado, o seu pedido chegou. Respondemos em menos de 4 horas.", "ok");
     } catch (_) {
       const body = [`Nome: ${fd.get("name")}`, `Telefone: ${fd.get("phone")}`, `Setor: ${fd.get("branche")}`, "", fd.get("message") || "", "", cfg].join("\n");
       say("O envio falhou. O seu programa de e-mail vai abrir com o pedido já preparado.", "err");
-      location.href = `mailto:${MAIL_TO}?subject=${encodeURIComponent("Pedido através de vantor-marketing.com")}&body=${encodeURIComponent(body)}`;
+      location.href = `mailto:ben@vantor-marketing.com?cc=falk@vantor-marketing.com&subject=${encodeURIComponent("Anfrage über vantor-marketing.com")}&body=${encodeURIComponent(body)}`;
     } finally { btn.disabled = false; btn.textContent = "Pedir chamada"; }
   });
 })();
@@ -2903,14 +2907,14 @@ render = function () { _renderL2(); if (touched) store.set("cfg", encodeState())
     S.stadt = ort; $("#c-stadt").value = ort; const as = $("#ad-s"); as.value = ort; as.dispatchEvent(new Event("input")); render();
   }
   anchorLine();
-  if (!hasCfgHash && saved && S.firma) {
+  if (!hasCfgHash && saved && S.firma && !(() => { try { return sessionStorage.getItem("vx_wb"); } catch (_) { return null; } })()) {
     const c = cost(S), b = document.createElement("div");
     b.className = "welcome"; b.setAttribute("role", "status");
     b.innerHTML = `<span>Bem-vindo de volta. O seu pacote para <b>${esc(S.firma)}</b> continua aqui: ${eur(c.once)} + ${eur(c.month)}/mês.</span><a class="btn btn-signal btn-sm" href="#konfigurator">Continuar</a><button class="x" type="button" aria-label="Fechar">×</button>`;
     document.body.appendChild(b);
-    const off = () => b.classList.remove("on");
-    $(".x", b).addEventListener("click", off); $("a", b).addEventListener("click", off);
-    setTimeout(() => b.classList.add("on"), 1400); setTimeout(off, 12000);
+    const off = () => { b.classList.remove("on"); setTimeout(() => b.remove(), 600); };
+    $(".x", b).addEventListener("click", () => { off(); try { sessionStorage.setItem("vx_wb", "1"); } catch (_) {} }); $("a", b).addEventListener("click", off);
+    setTimeout(() => b.classList.add("on"), 1400); setTimeout(off, 10000);
   }
 })();
 
